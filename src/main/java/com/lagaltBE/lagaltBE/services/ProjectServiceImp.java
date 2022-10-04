@@ -2,9 +2,11 @@ package com.lagaltBE.lagaltBE.services;
 
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.repositories.ProjectRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class ProjectServiceImp implements ProjectService {
     private final ProjectRepository projectRepostiory;
 
