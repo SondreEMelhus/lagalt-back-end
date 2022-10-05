@@ -13,13 +13,15 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 50)
-    String name;
+    private String title;
+    @Column(length = 500)
+    private String description;
 
     @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + title + '\'' +
                 '}';
     }
 }
