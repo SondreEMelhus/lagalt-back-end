@@ -20,12 +20,12 @@ public abstract class AccountMapper {
     protected ContributorService contributorService;
 
     @Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsToIds")
-    public abstract AccountDTO userAccountToUserAccountDto(Account userAccount);
+    public abstract AccountDTO accountToAccountDto(Account account);
 
-    public abstract Collection<Account> userAccountDtoToUserAccount(Collection<Account> userAccounts);
+    public abstract Collection<AccountDTO> accountToAccountDto(Collection<Account> accounts);
 
     @Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsIdsToContributors")
-    public abstract Account userAccountDtoToUserAccount(AccountDTO accountDTO);
+    public abstract Account accountDtoToAccount(AccountDTO accountDTO);
 
     @Named("contributorsToIds")
     Set<Integer> mapContributorsToIds(Set<Contributor> contributors) {

@@ -1,8 +1,10 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.models.Project;
+import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
@@ -27,11 +29,13 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ProjectMapper projectMapper;
     private final ContributorMapper contributorMapper;
+    private final AccountMapper accountMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.contributorMapper = contributorMapper;
+        this.accountMapper = accountMapper;
     }
 
     @Operation(summary = "Get all projects")
@@ -79,6 +83,14 @@ public class ProjectController {
                 projectService.findById(id).getContributors()
         );
         return ResponseEntity.ok(contributors);
+    }
+
+    @GetMapping("{id}/accounts") //GET: api/v1/projects/1
+    public ResponseEntity getAccounts(@PathVariable int id) {
+        Collection<AccountDTO> accounts = accountMapper.accountToAccountDto(
+                projectService.findById(id).getAccounts()
+        );
+        return ResponseEntity.ok(accounts);
     }
 
     @Operation(summary = "Adds a new project")
