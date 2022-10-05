@@ -1,7 +1,15 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.models.dtos.UserAccountDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import com.lagaltBE.lagaltBE.models.UserAccount;
 import com.lagaltBE.lagaltBE.services.userAccount.UserAccountService;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -25,13 +33,13 @@ public class UserAccountController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = StudentDTO.class))) }),
+                                    array = @ArraySchema(schema = @Schema(implementation = UserAccountDTO.class))) }),
             @ApiResponse(responseCode = "404",
                     description = "Users does not exist with supplied ID",
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ApiErrorResponse.class)) })
+                                    schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping
     public ResponseEntity<Collection<UserAccount>> getAll() {
