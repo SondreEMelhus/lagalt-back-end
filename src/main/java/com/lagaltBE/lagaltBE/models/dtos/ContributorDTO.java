@@ -8,4 +8,5 @@ public class ContributorDTO {
     private int id;
     private String role;
     private int project;
+    private int account;
 }

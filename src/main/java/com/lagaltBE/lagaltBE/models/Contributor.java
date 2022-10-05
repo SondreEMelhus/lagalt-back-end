@@ -14,9 +14,9 @@ public class Contributor {
     // bør endres til enum!!!!!!
     @Column(length = 50)
     private String role;
-    //@ManyToOne
-    //@JoinColumn
-    //private UserAccount userAccount;
+    @ManyToOne
+    @JoinColumn
+    private Account account;
     @ManyToOne
     @JoinColumn
     private Project project;

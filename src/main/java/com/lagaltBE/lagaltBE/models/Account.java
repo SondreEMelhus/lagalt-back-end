@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class UserAccount {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,8 +16,9 @@ public class UserAccount {
     String name;
     @Column(length = 100, nullable = false)
     String email;
-    //@OneToMany(mappedBy = "user_account")
-    //Set<Contributor> contributors;
+
+    @OneToMany(mappedBy = "account")
+    Set<Contributor> contributors;
 
     // Set<Application> applicationHistory;
     // Set<Skill> skills;
