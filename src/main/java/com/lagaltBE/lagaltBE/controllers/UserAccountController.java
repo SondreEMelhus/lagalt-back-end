@@ -52,7 +52,7 @@ public class UserAccountController {
                     description = "Success",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserAccountDTO.class)) }),
-            @ApiResponse(responseCode = "404",
+            @ApiResponse(responseCode = "500",
                     description = "User does not exist with supplied ID",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
