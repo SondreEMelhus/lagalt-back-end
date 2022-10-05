@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,6 +17,9 @@ public class Project {
     private String title;
     @Column(length = 500)
     private String description;
+
+    @OneToMany(mappedBy = "project")
+    Set<Contributor> contributors;
 
     @Override
     public String toString() {
