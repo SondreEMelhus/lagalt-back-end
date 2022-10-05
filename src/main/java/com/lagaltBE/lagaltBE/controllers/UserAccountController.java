@@ -26,7 +26,7 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    @Operation(summary = "Get all users")
+    @Operation(summary = "Get all user accounts")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Success",
@@ -46,11 +46,32 @@ public class UserAccountController {
         return ResponseEntity.ok(userAccountService.findAll());
     }
 
+    @Operation(summary = "Get a user account by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserAccountDTO.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User does not exist with supplied ID",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
     @GetMapping("{id}")
     public ResponseEntity<UserAccount> getById(@PathVariable int id) {
         return ResponseEntity.ok(userAccountService.findById(id));
     }
 
+    @Operation(summary = "Add a user account")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "201",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
     @PostMapping
     public  ResponseEntity add(@RequestBody UserAccount userAccount) {
         UserAccount user = userAccountService.add(userAccount);
@@ -58,6 +79,19 @@ public class UserAccountController {
         return ResponseEntity.created(location).build();
     }
 
+    @Operation(summary = "Updates a user account")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "User successfully updated",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User not found with supplied ID",
+                    content = @Content)
+    })
     @PutMapping("{id}")
     public ResponseEntity update(@RequestBody UserAccount userAccount, @PathVariable int id) {
         if (id != userAccount.getId())
@@ -66,6 +100,16 @@ public class UserAccountController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Delete a user account")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "201",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such user",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
     @DeleteMapping("{id}")
     public ResponseEntity delete(@PathVariable int id) {
         userAccountService.deleteById(id);
