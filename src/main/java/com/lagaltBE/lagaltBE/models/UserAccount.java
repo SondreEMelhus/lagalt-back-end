@@ -3,6 +3,7 @@ package com.lagaltBE.lagaltBE.models;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,8 +16,10 @@ public class UserAccount {
     String name;
     @Column(length = 100, nullable = false)
     String email;
+    //@OneToMany(mappedBy = "user_account")
+    //Set<Contributor> contributors;
+
     // Set<Application> applicationHistory;
     // Set<Skill> skills;
-    // Set<Contribution> contributions;
     // Set<Contributor> contributor;
 }

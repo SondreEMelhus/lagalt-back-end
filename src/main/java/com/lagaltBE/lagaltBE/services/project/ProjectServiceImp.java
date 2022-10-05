@@ -1,13 +1,16 @@
 package com.lagaltBE.lagaltBE.services.project;
 
+import com.lagaltBE.lagaltBE.models.Contributor;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Service
 public class ProjectServiceImp implements ProjectService {
+
     private final ProjectRepository projectRepostiory;
 
     public ProjectServiceImp(ProjectRepository projectRepostiory) {
@@ -43,4 +46,5 @@ public class ProjectServiceImp implements ProjectService {
     public void delete(Project entity) {
         projectRepostiory.delete(entity);
     }
+
 }
