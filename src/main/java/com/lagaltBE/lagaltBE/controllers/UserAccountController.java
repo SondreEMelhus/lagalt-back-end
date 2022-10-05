@@ -102,7 +102,7 @@ public class UserAccountController {
 
     @Operation(summary = "Delete a user account")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "201",
+            @ApiResponse(responseCode = "204",
                     description = "success",
                     content = @Content),
             @ApiResponse(responseCode = "500",
