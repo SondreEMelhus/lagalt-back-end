@@ -25,5 +25,6 @@ public class UserAccount {
     private Set<Skill> skills;
     // Set<Application> applicationHistory;
     // Set<Contribution> contributions;
-    // Set<Contributor> contributor;
+    //@OneToMany(mappedBy = "user_account")
+    //Set<Contributor> contributors;
 }
