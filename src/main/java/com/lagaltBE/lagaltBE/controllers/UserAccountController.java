@@ -1,6 +1,9 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.mappers.SkillMapper;
+import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.UserAccountDTO;
+import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/v1/useraccounts")
@@ -21,9 +25,13 @@ public class UserAccountController {
 
     // TODO do we need find a user by name?
     private final UserAccountService userAccountService;
+    private final SkillMapper skillMapper;
+    private final SkillService skillService;
 
-    public UserAccountController(UserAccountService userAccountService) {
+    public UserAccountController(UserAccountService userAccountService, SkillMapper skillMapper, SkillService skillService) {
         this.userAccountService = userAccountService;
+        this.skillMapper = skillMapper;
+        this.skillService = skillService;
     }
 
     @Operation(summary = "Get all user accounts")
@@ -113,6 +121,74 @@ public class UserAccountController {
     @DeleteMapping("{id}")
     public ResponseEntity delete(@PathVariable int id) {
         userAccountService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get skills of a user")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such user",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/getUserSkills/{id}")
+    public ResponseEntity getUserSkills(@PathVariable int id){
+        UserAccount user = userAccountService.findById(id);
+        Set<Skill> skills = user.getSkills();
+        return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
+    }
+
+    @Operation(summary = "Adds a skill to a user")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Skill successfully added",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/addSkill/{userId}")
+    public ResponseEntity addSkill(@PathVariable int userId, @RequestBody int skillId) {
+        UserAccount user = userAccountService.findById(userId);
+        Skill skill = skillService.findById(skillId);
+        Set<Skill> skills = user.getSkills();
+        skills.add(skill);
+        user.setSkills(skills);
+        userAccountService.update(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Removes a skill from a user")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Skill successfully removed",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/removeSkill/{userId}")
+    public ResponseEntity removeSkill(@PathVariable int userId, @RequestBody int skillId) {
+        UserAccount user = userAccountService.findById(userId);
+        Skill skill = skillService.findById(skillId);
+        Set<Skill> skills = user.getSkills();
+        skills.remove(skill);
+        user.setSkills(skills);
+        userAccountService.update(user);
         return ResponseEntity.noContent().build();
     }
 }

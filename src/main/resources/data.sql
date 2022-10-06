@@ -3,10 +3,10 @@ insert into project (title) values ('bygge legat app');
 insert into project (title) values ('fotballlag');
 insert into project (title) values ('larping');
 
-insert into user_account (name, email) values ('Ulrik', 'ulrik@gmail.com');
-insert into user_account (name, email) values ('Trygve', 'trygve@gmail.com');
-insert into user_account (name, email) values ('Sondre', 'sondre@gmail.com');
-insert into user_account (name, email) values ('Karoline', 'karoline@gmail.com');
+insert into user_account (name, email, visible) values ('Ulrik', 'ulrik@gmail.com', true);
+insert into user_account (name, email, visible) values ('Trygve', 'trygve@gmail.com', true);
+insert into user_account (name, email, visible) values ('Sondre', 'sondre@gmail.com', true);
+insert into user_account (name, email, visible) values ('Karoline', 'karoline@gmail.com', true);
 
 INSERT INTO skill (title) VALUES ('Java');
 INSERT INTO skill (title) VALUES ('Design');

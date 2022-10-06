@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public abstract class SkillMapper {
     public abstract SkillDTO skillToSkillDto(Skill skill);
 
-    @Mapping(target = "title")
+    @Mapping(target = "title", ignore = true)
     public abstract Skill skillDtoToUSkill(SkillDTO skillDTO);
 }

@@ -23,6 +23,8 @@ public class UserAccount {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private Set<Skill> skills;
+    @Column()
+    private boolean visible;
     // Set<Application> applicationHistory;
     // Set<Contribution> contributions;
     //@OneToMany(mappedBy = "user_account")
