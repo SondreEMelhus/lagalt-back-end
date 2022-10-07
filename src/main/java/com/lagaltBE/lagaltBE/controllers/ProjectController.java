@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Set;
-@CrossOrigin(origins = "*", maxAge = 3600L)
+@CrossOrigin("*")
 @RestController
 @RequestMapping(path = "api/v1/projects")
 public class ProjectController {

@@ -31,6 +31,9 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+	// https://mvnrepository.com/artifact/org.springframework/spring-context
+	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.9'
+
 }
 
 tasks.named('test') {
