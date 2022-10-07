@@ -11,5 +11,5 @@ public class UserAccountDTO {
     private String name;
     private String email;
     private boolean visible;
-    private Set<Skill> skills;
+    private Set<Integer> skills;
 }

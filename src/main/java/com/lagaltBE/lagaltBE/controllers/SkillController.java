@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.SkillDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
@@ -20,9 +21,11 @@ import java.util.Collection;
 public class SkillController {
 
     private final SkillService skillService;
+    private final SkillMapper skillMapper;
 
-    public SkillController(SkillService skillService) {
+    public SkillController(SkillService skillService, SkillMapper skillMapper) {
         this.skillService = skillService;
+        this.skillMapper = skillMapper;
     }
 
     @Operation(summary = "Get all skills")
@@ -41,8 +44,11 @@ public class SkillController {
                                     schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping
-    public ResponseEntity<Collection<Skill>> getAll() {
-        return ResponseEntity.ok(skillService.findAll());
+    public ResponseEntity getAll() {
+        Collection<SkillDTO> skills = skillMapper.skillToSkillDto(
+                skillService.findAll()
+        );
+        return ResponseEntity.ok(skills);
     }
 
     @Operation(summary = "Get a skill by ID")
