@@ -10,4 +10,5 @@ public class ProjectDTO {
     private String title;
     private String description;
     private Set<Integer> contributors;
+    private Set<Integer> skills;
 }

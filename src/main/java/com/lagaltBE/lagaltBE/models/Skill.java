@@ -17,4 +17,6 @@ public class Skill {
     private String title;
     @ManyToMany(mappedBy = "skills")
     private Set<Account> accounts;
+    @ManyToMany(mappedBy = "skills")
+    private Set<Project> projects;
 }

@@ -3,7 +3,9 @@ package com.lagaltBE.lagaltBE.controllers;
 import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
+import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Project;
+import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/v1/projects")
@@ -30,12 +33,14 @@ public class ProjectController {
     private final ProjectMapper projectMapper;
     private final ContributorMapper contributorMapper;
     private final AccountMapper accountMapper;
+    private final SkillMapper skillMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.contributorMapper = contributorMapper;
         this.accountMapper = accountMapper;
+        this.skillMapper = skillMapper;
     }
 
     @Operation(summary = "Get all projects")
@@ -150,4 +155,23 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Get skills of a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such project",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/getProjectSkills/{id}")
+    public ResponseEntity getProjectSkills(@PathVariable int id){
+        Project project = projectService.findById(id);
+        Set<Skill> skills = project.getSkills();
+        return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
+    }
 }

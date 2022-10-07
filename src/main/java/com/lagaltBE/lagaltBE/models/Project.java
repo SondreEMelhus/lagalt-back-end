@@ -21,6 +21,13 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     Set<Contributor> contributors;
+    @ManyToMany
+    @JoinTable(
+            name = "skill_project",
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
+    private Set<Skill> skills;
 
     public HashSet<Account> getAccounts() {
         HashSet<Account> accounts = new HashSet<>();
