@@ -5,6 +5,7 @@ insert into project (title) values ('larping');
 insert into project (title) values ('skating');
 insert into project (title) values ('surfing');
 insert into project (title) values ('trainspotting');
+insert into project (title) values ('ølsmaking');
 
 insert into account (name, email, visible) values ('Ulrik', 'ulrik@gmail.com', true);          -- 1
 insert into account (name, email, visible) values ('Trygve', 'trygve@gmail.com', true);        -- 2
