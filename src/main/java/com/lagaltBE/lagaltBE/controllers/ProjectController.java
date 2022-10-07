@@ -47,7 +47,6 @@ public class ProjectController {
         this.skillService = skillService;
     }
 
-    @CrossOrigin("*")
     @Operation(summary = "Get all projects")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200",
@@ -144,6 +143,7 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
+    @CrossOrigin("*")
     @Operation(summary = "Deletes a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",
