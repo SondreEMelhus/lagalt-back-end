@@ -156,7 +156,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/addSkill/{userId}")
+    @PutMapping("/addSkillToUser/{userId}")
     public ResponseEntity addSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
@@ -180,7 +180,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/removeSkill/{userId}")
+    @PutMapping("/removeSkillFromUser/{userId}")
     public ResponseEntity removeSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);

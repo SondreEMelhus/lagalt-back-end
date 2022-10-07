@@ -4,12 +4,14 @@ import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
+import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
+import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -34,13 +36,15 @@ public class ProjectController {
     private final ContributorMapper contributorMapper;
     private final AccountMapper accountMapper;
     private final SkillMapper skillMapper;
+    private final SkillService skillService;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.contributorMapper = contributorMapper;
         this.accountMapper = accountMapper;
         this.skillMapper = skillMapper;
+        this.skillService = skillService;
     }
 
     @Operation(summary = "Get all projects")
@@ -173,5 +177,53 @@ public class ProjectController {
         Project project = projectService.findById(id);
         Set<Skill> skills = project.getSkills();
         return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
+    }
+
+    @Operation(summary = "Add a skill to a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Skill successfully added",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Project not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/addSkillToProject/{projectId}")
+    public ResponseEntity addSkill(@PathVariable int projectId, @RequestBody int skillId) {
+        Project project = projectService.findById(projectId);
+        Skill skill = skillService.findById(skillId);
+        Set<Skill> skills = project.getSkills();
+        skills.add(skill);
+        project.setSkills(skills);
+        projectService.update(project);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Removes a skill from a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Skill successfully removed",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Project not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/removeSkillFromProject/{projectId}")
+    public ResponseEntity removeSkill(@PathVariable int projectId, @RequestBody int skillId) {
+        Project project = projectService.findById(projectId);
+        Skill skill = skillService.findById(skillId);
+        Set<Skill> skills = project.getSkills();
+        skills.remove(skill);
+        project.setSkills(skills);
+        projectService.update(project);
+        return ResponseEntity.noContent().build();
     }
 }
