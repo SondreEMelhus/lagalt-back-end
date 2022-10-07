@@ -1,14 +1,10 @@
 package com.lagaltBE.lagaltBE.controllers;
 
-<<<<<<< HEAD
 import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
-=======
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
-import com.lagaltBE.lagaltBE.models.dtos.UserAccountDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
->>>>>>> development-karoline
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,25 +20,17 @@ import java.util.Collection;
 import java.util.Set;
 
 @RestController
-@RequestMapping(path = "api/v1/useraccounts")
-public class UserAccountController {
+@RequestMapping(path = "api/v1/accounts")
+public class AccountController {
 
-    // TODO do we need find a user by name?
-<<<<<<< HEAD
     private final AccountService accountService;
-
-    public UserAccountController(AccountService accountService) {
-        this.accountService = accountService;
-=======
-    private final UserAccountService userAccountService;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
 
-    public UserAccountController(UserAccountService userAccountService, SkillMapper skillMapper, SkillService skillService) {
-        this.userAccountService = userAccountService;
+    public AccountController(AccountService accountService, SkillMapper skillMapper, SkillService skillService) {
+        this.accountService = accountService;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
->>>>>>> development-karoline
     }
 
     @Operation(summary = "Get all user accounts")
@@ -94,7 +82,7 @@ public class UserAccountController {
     @PostMapping
     public  ResponseEntity add(@RequestBody Account account) {
         Account user = accountService.add(account);
-        URI location = URI.create("useraccounts/" + user.getId());
+        URI location = URI.create("accounts/" + user.getId());
         return ResponseEntity.created(location).build();
     }
 
@@ -150,7 +138,7 @@ public class UserAccountController {
     })
     @GetMapping("/getUserSkills/{id}")
     public ResponseEntity getUserSkills(@PathVariable int id){
-        UserAccount user = userAccountService.findById(id);
+        Account user = accountService.findById(id);
         Set<Skill> skills = user.getSkills();
         return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
     }
@@ -170,12 +158,12 @@ public class UserAccountController {
     })
     @PutMapping("/addSkill/{userId}")
     public ResponseEntity addSkill(@PathVariable int userId, @RequestBody int skillId) {
-        UserAccount user = userAccountService.findById(userId);
+        Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
         Set<Skill> skills = user.getSkills();
         skills.add(skill);
         user.setSkills(skills);
-        userAccountService.update(user);
+        accountService.update(user);
         return ResponseEntity.noContent().build();
     }
 
@@ -194,12 +182,54 @@ public class UserAccountController {
     })
     @PutMapping("/removeSkill/{userId}")
     public ResponseEntity removeSkill(@PathVariable int userId, @RequestBody int skillId) {
-        UserAccount user = userAccountService.findById(userId);
+        Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
         Set<Skill> skills = user.getSkills();
         skills.remove(skill);
         user.setSkills(skills);
-        userAccountService.update(user);
+        accountService.update(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Set profile to visible")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Profile successfully set to visible",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/setProfileToVisible/{id}")
+    public ResponseEntity setProfileToVisible(@PathVariable int id) {
+        Account user = accountService.findById(id);
+        user.setVisible(true);
+        accountService.update(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Set profile to hidden")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Profile successfully set to hidden",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "User not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/setProfileToHidden/{id}")
+    public ResponseEntity setProfileToHidden(@PathVariable int id) {
+        Account user = accountService.findById(id);
+        user.setVisible(false);
+        accountService.update(user);
         return ResponseEntity.noContent().build();
     }
 }

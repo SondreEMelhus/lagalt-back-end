@@ -16,5 +16,5 @@ public class Skill {
     @Column(length = 100, nullable = false)
     private String title;
     @ManyToMany(mappedBy = "skills")
-    private Set<UserAccount> userAccounts;
+    private Set<Account> accounts;
 }
