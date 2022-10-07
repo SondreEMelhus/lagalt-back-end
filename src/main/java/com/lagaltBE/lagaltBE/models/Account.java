@@ -13,14 +13,21 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 50, nullable = false)
-    String name;
+    private String name;
     @Column(length = 100, nullable = false)
-    String email;
-
+    private String email;
+    @Column()
+    private boolean visible;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
+    @ManyToMany
+    @JoinTable(
+            name = "account_skill",
+            joinColumns = {@JoinColumn(name = "account_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
+    private Set<Skill> skills;
 
+    // Set<Contribution> contributions;
     // Set<Application> applicationHistory;
-    // Set<Skill> skills;
-    // Set<Contributor> contributor;
 }
