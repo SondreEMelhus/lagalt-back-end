@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Set;
-@CrossOrigin(origins = "https://lagalt-java-backend.herokuapp.com/")
+@CrossOrigin("*")
 @RestController
 @RequestMapping(path = "api/v1/projects")
 public class ProjectController {
@@ -47,7 +47,7 @@ public class ProjectController {
         this.skillService = skillService;
     }
 
-    @CrossOrigin(origins = "https://lagalt-java-backend.herokuapp.com/")
+    @CrossOrigin("*")
     @Operation(summary = "Get all projects")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200",
