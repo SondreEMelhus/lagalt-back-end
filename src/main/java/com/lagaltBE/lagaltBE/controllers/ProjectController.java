@@ -47,6 +47,7 @@ public class ProjectController {
         this.skillService = skillService;
     }
 
+    @CrossOrigin(origins = "https://lagalt-java-backend.herokuapp.com/")
     @Operation(summary = "Get all projects")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200",
