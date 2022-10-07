@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
@@ -24,11 +25,13 @@ import java.util.Set;
 public class AccountController {
 
     private final AccountService accountService;
+    private final AccountMapper accountMapper;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
 
-    public AccountController(AccountService accountService, SkillMapper skillMapper, SkillService skillService) {
+    public AccountController(AccountService accountService, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService) {
         this.accountService = accountService;
+        this.accountMapper = accountMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
     }
@@ -37,10 +40,9 @@ public class AccountController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Success",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = AccountDTO.class))) }),
+                    content = { @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = AccountDTO.class))) }),
             @ApiResponse(responseCode = "404",
                     description = "Users does not exist with supplied ID",
                     content = {
@@ -49,8 +51,11 @@ public class AccountController {
                                     schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping
-    public ResponseEntity<Collection<Account>> getAll() {
-        return ResponseEntity.ok(accountService.findAll());
+    public ResponseEntity getAll() {
+        Collection<AccountDTO> accounts = accountMapper.accountToAccountDto(
+                accountService.findAll()
+        );
+        return ResponseEntity.ok(accounts);
     }
 
     @Operation(summary = "Get a user account by ID")
