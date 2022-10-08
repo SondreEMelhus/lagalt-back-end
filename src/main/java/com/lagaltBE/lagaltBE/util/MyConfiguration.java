@@ -13,11 +13,6 @@ public class MyConfiguration {
         super();
     }
 
-    /**
-     * Bean to define global CORS.
-     *
-     * @return
-     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
