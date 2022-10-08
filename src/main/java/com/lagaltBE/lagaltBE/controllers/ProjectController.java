@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Set;
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping(path = "api/v1/projects")
 public class ProjectController {
@@ -119,7 +119,7 @@ public class ProjectController {
         return ResponseEntity.created(location).build();
     }
 
-    @CrossOrigin("*")
+    // virker ikke?
     @Operation(summary = "Updates a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -144,7 +144,6 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin("*")
     @Operation(summary = "Deletes a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",

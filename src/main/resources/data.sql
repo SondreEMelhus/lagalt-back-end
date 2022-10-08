@@ -12,17 +12,20 @@ insert into account (first_name, last_name, username, email, visible) values ('S
 insert into account (first_name, last_name, username, email, visible) values ('Egil', 'Olsen', 'drillo', 'drillo@gmail.com', true);
 insert into account (first_name, last_name, username, email, visible) values ('Ole Gunnar', 'Solskjær', 'ole-g', 'ole-g@gmail.com', true);
 
-insert into contributor (account_id, project_id, role) values (1,1,'member');
+insert into contributor (account_id, project_id, role) values (1,1,'owner');
 insert into contributor (account_id, project_id, role) values (2,1,'member');
 insert into contributor (account_id, project_id, role) values (3,1,'member');
 insert into contributor (account_id, project_id, role) values (4,1,'member');
-insert into contributor (account_id, project_id, role) values (5,1,'member');
-insert into contributor (account_id, project_id, role) values (6,1,'member');
-insert into contributor (account_id, project_id, role) values (5,2,'member');
+insert into contributor (account_id, project_id, role) values (5,2,'owner');
 insert into contributor (account_id, project_id, role) values (6,2,'member');
 
 INSERT INTO skill (title) VALUES ('Java');
 INSERT INTO skill (title) VALUES ('Design');
+INSERT INTO skill (title) VALUES ('Kaffe');
 
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,1);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,2);
+
+insert into skill_project ("project_id", "skill_id") values (1,1);
+insert into skill_project ("project_id", "skill_id") values (1,2);
+insert into skill_project ("project_id", "skill_id") values (1,3);
