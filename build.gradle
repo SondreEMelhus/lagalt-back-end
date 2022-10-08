@@ -28,12 +28,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.apache.httpcomponents:httpclient'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
-	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-	// https://mvnrepository.com/artifact/org.springframework/spring-context
-	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.9'
-
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.19'
 }
 
 tasks.named('test') {
