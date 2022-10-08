@@ -50,7 +50,7 @@ public class AccountController {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @GetMapping
+    @GetMapping //GET: api/v1/accounts
     public ResponseEntity getAll() {
         Collection<AccountDTO> accounts = accountMapper.accountToAccountDto(
                 accountService.findAll()
@@ -69,12 +69,15 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @GetMapping("{id}")
-    public ResponseEntity<Account> getById(@PathVariable int id) {
-        return ResponseEntity.ok(accountService.findById(id));
+    @GetMapping("{id}") //GET: api/v1/accounts/1
+    public ResponseEntity getById(@PathVariable int id) {
+        AccountDTO account = accountMapper.accountToAccountDto(
+                accountService.findById(id)
+        );
+        return ResponseEntity.ok(account);
     }
 
-    @Operation(summary = "Add a user account")
+    @Operation(summary = "Add an account")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",
                     description = "success",
@@ -84,13 +87,14 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @PostMapping
+    @PostMapping    //POST: api/v1/accounts
     public  ResponseEntity add(@RequestBody Account account) {
         Account user = accountService.add(account);
         URI location = URI.create("accounts/" + user.getId());
         return ResponseEntity.created(location).build();
     }
 
+    // virker ikke ???
     @Operation(summary = "Updates a user account")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -104,11 +108,13 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody Account userAccount, @PathVariable int id) {
-        if (id != userAccount.getId())
+    @PutMapping("{id}") //PUT: api/v1/accounts
+    public ResponseEntity update(@RequestBody AccountDTO accountDTO, @PathVariable int id) {
+        if (id != accountDTO.getId())
             return ResponseEntity.badRequest().build();
-        accountService.update(userAccount);
+        accountService.update(
+            accountMapper.accountDtoToAccount(accountDTO)
+        );
         return ResponseEntity.noContent().build();
     }
 
@@ -122,12 +128,13 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}")  //DELETE: api/v1/accounts/1
     public ResponseEntity delete(@PathVariable int id) {
         accountService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
+    // endre navn til getSkills og path til //GET: api/v1/accounts/1/skills ???
     @Operation(summary = "Get skills of a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",
@@ -148,6 +155,7 @@ public class AccountController {
         return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
     }
 
+    // endre navn til addSkill og path til //POST: api/v1/accounts/1/skills ???
     @Operation(summary = "Adds a skill to a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -172,6 +180,7 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
+    // endre navn til removeSkill og path til //DELETE: api/v1/accounts/1/skills ???
     @Operation(summary = "Removes a skill from a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -211,9 +220,9 @@ public class AccountController {
     })
     @PutMapping("/setProfileToVisible/{id}")
     public ResponseEntity setProfileToVisible(@PathVariable int id) {
-        Account user = accountService.findById(id);
-        user.setVisible(true);
-        accountService.update(user);
+        Account account = accountService.findById(id);
+        account.setVisible(true);
+        accountService.update(account);
         return ResponseEntity.noContent().build();
     }
 
@@ -232,9 +241,9 @@ public class AccountController {
     })
     @PutMapping("/setProfileToHidden/{id}")
     public ResponseEntity setProfileToHidden(@PathVariable int id) {
-        Account user = accountService.findById(id);
-        user.setVisible(false);
-        accountService.update(user);
+        Account account = accountService.findById(id);
+        account.setVisible(false);
+        accountService.update(account);
         return ResponseEntity.noContent().build();
     }
 }

@@ -5,12 +5,12 @@ insert into project (title) values ('larping');
 insert into project (title) values ('skating');
 insert into project (title) values ('crossfit');
 
-insert into account (name, email, visible) values ('Ulrik', 'ulrik@gmail.com', true);          -- 1
-insert into account (name, email, visible) values ('Trygve', 'trygve@gmail.com', true);        -- 2
-insert into account (name, email, visible) values ('Sondre', 'sondre@gmail.com', true);        -- 3
-insert into account (name, email, visible) values ('Karoline', 'karoline@gmail.com', true);    -- 4
-insert into account (name, email, visible) values ('Ronaldo', 'ronaldo@gmail.com', true);      -- 5
-insert into account (name, email, visible) values ('Messi', 'messi@gmail.com', true);          -- 6
+insert into account (first_name, last_name, username, email, visible) values ('Ulrik', 'Lunde', 'ulrik', 'ulrik@gmail.com', true);          -- 1
+insert into account (first_name, last_name, username, email, visible) values ('Trygve', 'Johannessen', 'tj', 'tj@gmail.com', true);
+insert into account (first_name, last_name, username, email, visible) values ('Karoline', 'Øijorden', 'karo', 'karo@gmail.com', true);
+insert into account (first_name, last_name, username, email, visible) values ('Sondre', 'Melhus', 'sondre', 'sondre@gmail.com', true);
+insert into account (first_name, last_name, username, email, visible) values ('Egil', 'Olsen', 'drillo', 'drillo@gmail.com', true);
+insert into account (first_name, last_name, username, email, visible) values ('Ole Gunnar', 'Solskjær', 'ole-g', 'ole-g@gmail.com', true);
 
 insert into contributor (account_id, project_id, role) values (1,1,'member');
 insert into contributor (account_id, project_id, role) values (2,1,'member');
