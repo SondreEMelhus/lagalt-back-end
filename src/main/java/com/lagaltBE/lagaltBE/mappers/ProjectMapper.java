@@ -23,12 +23,29 @@ public abstract class ProjectMapper {
     @Autowired
     protected SkillService skillService;
 
-    @Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsToIds")
-    @Mapping(target = "skills", source = "skills", qualifiedByName = "skillsToIds")
+    @Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsToString")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "skillsToString")
     public abstract ProjectDTO projectToProjectDto(Project project);
 
     public abstract Collection<ProjectDTO> projectToProjectDto(Collection<Project> project);
 
+    /*@Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsIdsToContributors")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "skillIdsToSkills")
+    public abstract Project projectDtoToProject(ProjectDTO projectDTO);*/
+
+    @Named("contributorsToString")
+    Set<String> mapContributorsToIds(Set<Contributor> contributors) {
+        if (contributors == null) return null;
+        return contributors.stream().map(contributor -> contributor.getAccount().getUsername()).collect(Collectors.toSet());
+    }
+
+    @Named("skillsToString")
+    Set<String> mapSkillsToIds(Set<Skill> source) {
+        if(source == null) return null;
+        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+    }
+}
+/*
     @Mapping(target = "contributors", source = "contributors", qualifiedByName = "contributorsIdsToContributors")
     @Mapping(target = "skills", source = "skills", qualifiedByName = "skillIdsToSkills")
     public abstract Project projectDtoToProject(ProjectDTO projectDTO);
@@ -59,4 +76,5 @@ public abstract class ProjectMapper {
         return source.stream()
                 .map(s -> s.getId()).collect(Collectors.toSet());
     }
-}
+ */
+

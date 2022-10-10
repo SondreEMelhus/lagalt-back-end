@@ -1,12 +1,10 @@
 package com.lagaltBE.lagaltBE.controllers;
 
-import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
-import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
@@ -32,29 +30,28 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ProjectMapper projectMapper;
     private final ContributorMapper contributorMapper;
-    private final AccountMapper accountMapper;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper,
+            SkillMapper skillMapper, SkillService skillService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.contributorMapper = contributorMapper;
-        this.accountMapper = accountMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
     }
 
     @Operation(summary = "Get all projects")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200",
-                description = "Success",
-                content = {@Content(mediaType = "application/json",
-                array = @ArraySchema(schema = @Schema(implementation = ProjectDTO.class))) }),
-        @ApiResponse(responseCode = "404",
-                description = "Project does not exist with supplied ID",
-                content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = ApiErrorResponse.class)) })
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ProjectDTO.class))) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Project does not exist with supplied ID",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class)) })
     })
     @GetMapping //GET: api/v1/projects
     public ResponseEntity getAll() {
@@ -135,13 +132,11 @@ public class ProjectController {
                     content = @Content)
     })
     @PutMapping("{id}")  //POST: api/v1/projects/1
-    public ResponseEntity update(@RequestBody ProjectDTO projectDTO, @PathVariable int id) {
-        if ( id != projectDTO.getId() ) {
+    public ResponseEntity update(@RequestBody Project project, @PathVariable int id) {
+        if ( id != project.getId() ) {
             return ResponseEntity.badRequest().build();
         }
-        projectService.update(
-                projectMapper.projectDtoToProject(projectDTO)
-        );
+        projectService.update(project);
         return ResponseEntity.noContent().build();
     }
 
@@ -159,15 +154,6 @@ public class ProjectController {
     public ResponseEntity delete(@PathVariable int id) {
         projectService.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-
-    @GetMapping("{id}/contributors") //GET: api/v1/projects/1
-    public ResponseEntity getContributors(@PathVariable int id) {
-        Collection<ContributorDTO> contributors = contributorMapper.contributorToContributorDto(
-                projectService.findById(id).getContributors()
-        );
-        return ResponseEntity.ok(contributors);
     }
 
     @Operation(summary = "Get skills of a project")
@@ -237,4 +223,5 @@ public class ProjectController {
         projectService.update(project);
         return ResponseEntity.noContent().build();
     }
+
 }
