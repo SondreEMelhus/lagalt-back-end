@@ -94,7 +94,6 @@ public class AccountController {
         return ResponseEntity.created(location).build();
     }
 
-    // virker ikke ???
     @Operation(summary = "Updates a user account")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -109,12 +108,10 @@ public class AccountController {
                     content = @Content)
     })
     @PutMapping("{id}") //PUT: api/v1/accounts
-    public ResponseEntity update(@RequestBody AccountDTO accountDTO, @PathVariable int id) {
-        if (id != accountDTO.getId())
+    public ResponseEntity update(@RequestBody Account account, @PathVariable int id) {
+        if (id != account.getId())
             return ResponseEntity.badRequest().build();
-        accountService.update(
-            accountMapper.accountDtoToAccount(accountDTO)
-        );
+        accountService.update(account);
         return ResponseEntity.noContent().build();
     }
 
