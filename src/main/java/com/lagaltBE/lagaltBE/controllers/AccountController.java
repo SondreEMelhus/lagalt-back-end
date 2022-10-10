@@ -1,9 +1,11 @@
 package com.lagaltBE.lagaltBE.controllers;
 
+import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
+import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -26,11 +28,13 @@ public class AccountController {
     private final AccountService accountService;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
+    private final AccountMapper accountMapper;
 
-    public AccountController(AccountService accountService, SkillMapper skillMapper, SkillService skillService) {
+    public AccountController(AccountService accountService, SkillMapper skillMapper, SkillService skillService, AccountMapper accountMapper) {
         this.accountService = accountService;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
+        this.accountMapper = accountMapper;
     }
 
     @Operation(summary = "Get all user accounts")
@@ -49,8 +53,11 @@ public class AccountController {
                                     schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping
-    public ResponseEntity<Collection<Account>> getAll() {
-        return ResponseEntity.ok(accountService.findAll());
+    public ResponseEntity<Collection<AccountDTO>> getAll() {
+        Collection<AccountDTO> account = accountMapper.accountToAccountDto(
+                accountService.findAll()
+        );
+        return ResponseEntity.ok(account);
     }
 
     @Operation(summary = "Get a user account by ID")
@@ -65,8 +72,11 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping("{id}")
-    public ResponseEntity<Account> getById(@PathVariable int id) {
-        return ResponseEntity.ok(accountService.findById(id));
+    public ResponseEntity<AccountDTO> getById(@PathVariable int id) {
+        AccountDTO accountDTO = accountMapper.accountToAccountDto(
+                accountService.findById(id)
+        );
+        return ResponseEntity.ok(accountDTO);
     }
 
     @Operation(summary = "Add a user account")
