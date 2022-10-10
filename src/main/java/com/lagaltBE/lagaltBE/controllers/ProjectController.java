@@ -1,6 +1,5 @@
 package com.lagaltBE.lagaltBE.controllers;
 
-import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Project;
@@ -29,15 +28,14 @@ public class ProjectController {
 
     private final ProjectService projectService;
     private final ProjectMapper projectMapper;
-    private final ContributorMapper contributorMapper;
+
     private final SkillMapper skillMapper;
     private final SkillService skillService;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper,
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper,
             SkillMapper skillMapper, SkillService skillService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
-        this.contributorMapper = contributorMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
     }
