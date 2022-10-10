@@ -4,10 +4,8 @@ import com.lagaltBE.lagaltBE.mappers.AccountMapper;
 import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
-import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
-import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
@@ -86,20 +84,23 @@ public class ProjectController {
         return ResponseEntity.ok(projectDTO);
     }
 
-    @GetMapping("{id}/contributors") //GET: api/v1/projects/1
-    public ResponseEntity getContributors(@PathVariable int id) {
-        Collection<ContributorDTO> contributors = contributorMapper.contributorToContributorDto(
-                projectService.findById(id).getContributors()
+    @Operation(summary = "Get a project by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ProjectDTO.class)))}),
+            @ApiResponse(responseCode = "404",
+                    description = "project does not exist with supplied ID",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiErrorResponse.class))})
+    })
+    @GetMapping("search") // GET: localhost:8080/api/v1/characters/1
+    public ResponseEntity<Collection<ProjectDTO>> findAllByName(@RequestParam String name){
+        Collection<ProjectDTO> dtos = projectMapper.projectToProjectDto(
+                projectService.findAllByName(name)
         );
-        return ResponseEntity.ok(contributors);
-    }
-
-    @GetMapping("{id}/accounts") //GET: api/v1/projects/1
-    public ResponseEntity getAccounts(@PathVariable int id) {
-        Collection<AccountDTO> accounts = accountMapper.accountToAccountDto(
-                projectService.findById(id).getAccounts()
-        );
-        return ResponseEntity.ok(accounts);
+        return ResponseEntity.ok(dtos);
     }
 
     @Operation(summary = "Adds a new project")
@@ -110,7 +111,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "400",
                     description = "Malformed request",
                     content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = ErrorAttributeOptions.class))})
+                            schema = @Schema(implementation = ErrorAttributeOptions.class))})
     })
     @PostMapping //POST: api/v1/projects
     public ResponseEntity add(@RequestBody Project project) {
@@ -128,7 +129,7 @@ public class ProjectController {
             @ApiResponse(responseCode = "400",
                     description = "Malformed request",
                     content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
             @ApiResponse(responseCode = "404",
                     description = "Project not found with supplied ID",
                     content = @Content)
@@ -152,12 +153,21 @@ public class ProjectController {
             @ApiResponse(responseCode = "500",
                     description = "no such project",
                     content = { @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @DeleteMapping("{id}")  //POST: api/v1/projects/1
     public ResponseEntity delete(@PathVariable int id) {
         projectService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("{id}/contributors") //GET: api/v1/projects/1
+    public ResponseEntity getContributors(@PathVariable int id) {
+        Collection<ContributorDTO> contributors = contributorMapper.contributorToContributorDto(
+                projectService.findById(id).getContributors()
+        );
+        return ResponseEntity.ok(contributors);
     }
 
     @Operation(summary = "Get skills of a project")

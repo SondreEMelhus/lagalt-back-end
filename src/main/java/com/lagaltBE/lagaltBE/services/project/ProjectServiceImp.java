@@ -47,4 +47,9 @@ public class ProjectServiceImp implements ProjectService {
         projectRepostiory.delete(entity);
     }
 
+    @Override
+    public Collection<Project> findAllByName(String name) {
+        return projectRepostiory.findAllByName(name);
+    }
+
 }
