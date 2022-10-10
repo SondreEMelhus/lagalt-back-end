@@ -146,7 +146,7 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @GetMapping("/getUserSkills/{id}")
+    @GetMapping("/{id}/skills")
     public ResponseEntity getUserSkills(@PathVariable int id){
         Account user = accountService.findById(id);
         Set<Skill> skills = user.getSkills();
@@ -166,7 +166,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/addSkillToUser/{userId}")
+    @PutMapping("/{userId}/addSkill")
     public ResponseEntity addSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
@@ -190,7 +190,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/removeSkillFromUser/{userId}")
+    @PutMapping("/{userId}/removeSkill")
     public ResponseEntity removeSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
@@ -214,7 +214,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/setProfileToVisible/{id}")
+    @PutMapping("/{id}/setProfileToVisible")
     public ResponseEntity setProfileToVisible(@PathVariable int id) {
         Account user = accountService.findById(id);
         user.setVisible(true);
@@ -235,7 +235,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/setProfileToHidden/{id}")
+    @PutMapping("/{id}/setProfileToHidden")
     public ResponseEntity setProfileToHidden(@PathVariable int id) {
         Account user = accountService.findById(id);
         user.setVisible(false);

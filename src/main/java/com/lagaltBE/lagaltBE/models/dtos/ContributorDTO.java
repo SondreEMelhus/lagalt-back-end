@@ -1,6 +1,5 @@
 package com.lagaltBE.lagaltBE.models.dtos;
 
-import com.lagaltBE.lagaltBE.models.Project;
 import lombok.Data;
 
 @Data
