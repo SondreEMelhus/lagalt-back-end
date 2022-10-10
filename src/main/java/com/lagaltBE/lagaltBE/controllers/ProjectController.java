@@ -1,10 +1,6 @@
 package com.lagaltBE.lagaltBE.controllers;
 
-import com.lagaltBE.lagaltBE.mappers.AccountMapper;
-import com.lagaltBE.lagaltBE.mappers.ContributorMapper;
-import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
-import com.lagaltBE.lagaltBE.mappers.SkillMapper;
-import com.lagaltBE.lagaltBE.models.Account;
+import com.lagaltBE.lagaltBE.mappers.*;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
@@ -22,7 +18,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.Collection;
 import java.util.Set;
@@ -37,14 +32,16 @@ public class ProjectController {
     private final AccountMapper accountMapper;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
+    private final IndustryMapper industryMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, ContributorMapper contributorMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.contributorMapper = contributorMapper;
         this.accountMapper = accountMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
+        this.industryMapper = industryMapper;
     }
 
     @Operation(summary = "Get all projects")
@@ -172,7 +169,7 @@ public class ProjectController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @GetMapping("/getProjectSkills/{id}")
+    @GetMapping("/{id}/skills")
     public ResponseEntity getProjectSkills(@PathVariable int id){
         Project project = projectService.findById(id);
         Set<Skill> skills = project.getSkills();
@@ -192,7 +189,7 @@ public class ProjectController {
                     description = "Project not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/addSkillToProject/{projectId}")
+    @PutMapping("/{projectId}/addSkill")
     public ResponseEntity addSkill(@PathVariable int projectId, @RequestBody int skillId) {
         Project project = projectService.findById(projectId);
         Skill skill = skillService.findById(skillId);
@@ -216,7 +213,7 @@ public class ProjectController {
                     description = "Project not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/removeSkillFromProject/{projectId}")
+    @PutMapping("/{projectId}/removeSkill")
     public ResponseEntity removeSkill(@PathVariable int projectId, @RequestBody int skillId) {
         Project project = projectService.findById(projectId);
         Skill skill = skillService.findById(skillId);
@@ -225,5 +222,24 @@ public class ProjectController {
         project.setSkills(skills);
         projectService.update(project);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get industry of a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such project",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/industry")
+    public ResponseEntity getProjectIndustry(@PathVariable int id){
+        Project project = projectService.findById(id);
+        return ResponseEntity.ok(industryMapper.industryToIndustryDto(project.getIndustry()));
     }
 }
