@@ -22,6 +22,7 @@ import java.util.*;
 @RestController
 @RequestMapping(path = "api/v1/applications")
 public class ApplicationController {
+    /*
     private final ApplicationService applicationService;
     private final ApplicationMapper applicationMapper;
     private final ProjectService projectService;
@@ -124,5 +125,5 @@ public class ApplicationController {
         application.setStatus("Denied");
         applicationService.update(application);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }
