@@ -6,6 +6,7 @@ import java.util.Set;
 @Data
 public class AccountDTO {
     private int id;
+    private String name;
     private String firstName;
     private String lastName;
     private String username;
