@@ -12,9 +12,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String firstName;
-    @Column(length = 50) // nullable = false)
+    @Column(length = 50, nullable = false)
     private String lastName;
     @Column(length = 50, nullable = false, unique = true)
     private String username;
