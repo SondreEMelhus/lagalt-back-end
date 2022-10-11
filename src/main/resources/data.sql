@@ -43,3 +43,6 @@ INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (2,2);
 
 INSERT INTO keyword_project("keyword_id", "project_id") VALUES (1,1);
 INSERT INTO keyword_project("keyword_id", "project_id") VALUES (2,2);
+
+INSERT INTO application (account_id, project_id, motivation) VALUES (1,1,'I want to join this project');
+INSERT INTO application (account_id, project_id, motivation) VALUES (2,2,'This project seems cool');
