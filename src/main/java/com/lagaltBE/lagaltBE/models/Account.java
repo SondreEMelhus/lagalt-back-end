@@ -13,8 +13,6 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 50)
-    private String name;
-    @Column(length = 50)
     private String firstName;
     @Column(length = 50)
     private String lastName;
