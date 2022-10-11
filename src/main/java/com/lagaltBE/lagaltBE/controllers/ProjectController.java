@@ -31,13 +31,15 @@ public class ProjectController {
     private final SkillMapper skillMapper;
     private final SkillService skillService;
     private final IndustryMapper industryMapper;
+    private final KeywordMapper keywordMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
         this.industryMapper = industryMapper;
+        this.keywordMapper = keywordMapper;
     }
 
     @Operation(summary = "Get all projects")
@@ -239,5 +241,24 @@ public class ProjectController {
     public ResponseEntity getProjectIndustry(@PathVariable int id){
         Project project = projectService.findById(id);
         return ResponseEntity.ok(industryMapper.industryToIndustryDto(project.getIndustry()));
+    }
+
+    @Operation(summary = "Get keywords of a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such project",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/keywords")
+    public ResponseEntity getProjectKeywords(@PathVariable int id){
+        Project project = projectService.findById(id);
+        return ResponseEntity.ok(keywordMapper.keywordToKeywordDto(project.getKeywords()));
     }
 }

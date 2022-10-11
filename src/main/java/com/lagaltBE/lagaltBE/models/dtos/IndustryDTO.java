@@ -8,4 +8,5 @@ public class IndustryDTO {
     private int id;
     private String title;
     private Set<Integer> projects;
+    private Set<String> keywords;
 }

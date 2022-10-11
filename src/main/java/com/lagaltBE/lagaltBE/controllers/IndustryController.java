@@ -1,10 +1,10 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.IndustryMapper;
+import com.lagaltBE.lagaltBE.mappers.KeywordMapper;
 import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
-import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.industry.IndustryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,10 +24,12 @@ import java.util.Collection;
 public class IndustryController {
     private final IndustryService industryService;
     private final IndustryMapper industryMapper;
+    private final KeywordMapper keywordMapper;
 
-    public IndustryController(IndustryService industryService, IndustryMapper industryMapper) {
+    public IndustryController(IndustryService industryService, IndustryMapper industryMapper, KeywordMapper keywordMapper) {
         this.industryService = industryService;
         this.industryMapper = industryMapper;
+        this.keywordMapper = keywordMapper;
     }
 
     @Operation(summary = "Get all industries")
@@ -118,5 +120,24 @@ public class IndustryController {
     public ResponseEntity delete(@PathVariable int id) {
         industryService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get keywords of a industry")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such industry",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/keywords")
+    public ResponseEntity getIndustryKeywords(@PathVariable int id){
+        Industry industry = industryService.findById(id);
+        return ResponseEntity.ok(keywordMapper.keywordToKeywordDto(industry.getKeywords()));
     }
 }
