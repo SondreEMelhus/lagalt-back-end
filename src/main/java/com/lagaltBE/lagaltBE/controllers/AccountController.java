@@ -5,6 +5,7 @@ import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
+import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -51,7 +52,7 @@ public class AccountController {
                                     schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping //GET: api/v1/accounts
-    public ResponseEntity getAll() {
+    public ResponseEntity<Collection<AccountDTO>> getAll() {
         Collection<AccountDTO> accounts = accountMapper.accountToAccountDto(
                 accountService.findAll()
         );
@@ -70,7 +71,7 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
     @GetMapping("{id}") //GET: api/v1/accounts/1
-    public ResponseEntity getById(@PathVariable int id) {
+    public ResponseEntity<AccountDTO> getById(@PathVariable int id) {
         AccountDTO account = accountMapper.accountToAccountDto(
                 accountService.findById(id)
         );
@@ -131,7 +132,6 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    // endre navn til getSkills og path til //GET: api/v1/accounts/1/skills ???
     @Operation(summary = "Get skills of a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",
@@ -145,14 +145,13 @@ public class AccountController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @GetMapping("/getUserSkills/{id}")
+    @GetMapping("/{id}/skills")
     public ResponseEntity getUserSkills(@PathVariable int id){
         Account user = accountService.findById(id);
         Set<Skill> skills = user.getSkills();
         return ResponseEntity.ok(skills.stream().map(skillMapper::skillToSkillDto));
     }
 
-    // endre navn til addSkill og path til //POST: api/v1/accounts/1/skills ???
     @Operation(summary = "Adds a skill to a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -166,7 +165,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/addSkillToUser/{userId}")
+    @PutMapping("/{userId}/addSkill")
     public ResponseEntity addSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
@@ -177,7 +176,6 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    // endre navn til removeSkill og path til //DELETE: api/v1/accounts/1/skills ???
     @Operation(summary = "Removes a skill from a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
@@ -191,7 +189,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/removeSkillFromUser/{userId}")
+    @PutMapping("/{userId}/removeSkill")
     public ResponseEntity removeSkill(@PathVariable int userId, @RequestBody int skillId) {
         Account user = accountService.findById(userId);
         Skill skill = skillService.findById(skillId);
@@ -215,7 +213,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/setProfileToVisible/{id}")
+    @PutMapping("/{id}/setProfileToVisible")
     public ResponseEntity setProfileToVisible(@PathVariable int id) {
         Account account = accountService.findById(id);
         account.setVisible(true);
@@ -236,7 +234,7 @@ public class AccountController {
                     description = "User not found with supplied ID",
                     content = @Content)
     })
-    @PutMapping("/setProfileToHidden/{id}")
+    @PutMapping("/{id}/setProfileToHidden")
     public ResponseEntity setProfileToHidden(@PathVariable int id) {
         Account account = accountService.findById(id);
         account.setVisible(false);

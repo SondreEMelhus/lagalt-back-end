@@ -31,7 +31,5 @@ public class Account {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private Set<Skill> skills;
-
     // Set<Contribution> contributions;
-    // Set<Application> applicationHistory;
 }

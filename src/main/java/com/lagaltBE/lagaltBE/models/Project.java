@@ -2,7 +2,6 @@ package com.lagaltBE.lagaltBE.models;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +27,9 @@ public class Project {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private Set<Skill> skills;
+    @ManyToOne
+    @JoinColumn
+    private Industry industry;
 
     public HashSet<Account> getAccounts() {
         HashSet<Account> accounts = new HashSet<>();

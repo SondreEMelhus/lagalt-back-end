@@ -1,9 +1,14 @@
+INSERT INTO industry (title) VALUES ('Music'); --1
+INSERT INTO industry (title) VALUES ('Film'); --2
+INSERT INTO industry (title) VALUES ('Game Development'); --3
+INSERT INTO industry (title) VALUES ('Web Development'); --4
 
-insert into project (title) values ('bygge legat app');
-insert into project (title) values ('fotballlag');
-insert into project (title) values ('larping');
-insert into project (title) values ('skating');
-insert into project (title) values ('crossfit');
+insert into project (title, industry_id) values ('bygge legat app', 1);
+insert into project (title, industry_id) values ('fotballlag', 2);
+insert into project (title, industry_id) values ('larping', 3);
+insert into project (title, industry_id) values ('skating', 4);
+insert into project (title, industry_id) values ('surfing', 1);
+insert into project (title, industry_id) values ('trainspotting', 2);
 
 insert into account (first_name, last_name, username, email, visible) values ('Ulrik', 'Lunde', 'ulrik', 'ulrik@gmail.com', true);          -- 1
 insert into account (first_name, last_name, username, email, visible) values ('Trygve', 'Johannessen', 'tj', 'tj@gmail.com', true);
