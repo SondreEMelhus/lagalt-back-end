@@ -22,6 +22,8 @@ public class Account {
     private String email;
     @Column()
     private boolean visible;
+    @Column(length = 200)
+    private String description;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
     @ManyToMany
