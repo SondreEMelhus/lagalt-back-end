@@ -12,13 +12,13 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50) // nullable = false)
     private String firstName;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50) // nullable = false)
     private String lastName;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50) // nullable = false)
     private String username;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100) //, nullable = false)
     private String email;
     @Column()
     private boolean visible;
