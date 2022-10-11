@@ -11,7 +11,6 @@ import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public abstract class ApplicationMapper {
-    /*
     @Mapping(target = "firstName", source = "account", qualifiedByName = "applicationToFirstName")
     @Mapping(target = "lastName", source = "account", qualifiedByName = "applicationToLastName")
     public abstract ProjectApplicationDTO applicationToProjectApplicationDto(Application application);
@@ -32,5 +31,5 @@ public abstract class ApplicationMapper {
     @Named("applicationToProject")
     String mapApplicationsToProject(Project source) {
         return source.getTitle();
-    }*/
+    }
 }
