@@ -27,8 +27,5 @@ public class Account {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private Set<Skill> skills;
-    @OneToMany(mappedBy = "account")
-    Set<Application> applicationHistory;
-
     // Set<Contribution> contributions;
 }
