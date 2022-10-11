@@ -26,6 +26,8 @@ public class Account {
     private String description;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
+    @OneToMany(mappedBy = "account")
+    Set<Application> applications;
     @ManyToMany
     @JoinTable(
             name = "account_skill",

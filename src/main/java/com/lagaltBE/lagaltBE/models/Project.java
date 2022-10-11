@@ -20,6 +20,8 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     Set<Contributor> contributors;
+    @OneToMany(mappedBy = "project")
+    Set<Application> applications;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
