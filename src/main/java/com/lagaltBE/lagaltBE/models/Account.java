@@ -22,8 +22,12 @@ public class Account {
     private String email;
     @Column()
     private boolean visible;
+    @Column(length = 200)
+    private String description;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
+    @OneToMany(mappedBy = "account")
+    Set<Application> applications;
     @ManyToMany
     @JoinTable(
             name = "account_skill",
@@ -31,7 +35,5 @@ public class Account {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private Set<Skill> skills;
-
     // Set<Contribution> contributions;
-    // Set<Application> applicationHistory;
 }
