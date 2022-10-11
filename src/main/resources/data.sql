@@ -34,3 +34,12 @@ INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,2);
 insert into skill_project ("project_id", "skill_id") values (1,1);
 insert into skill_project ("project_id", "skill_id") values (1,2);
 insert into skill_project ("project_id", "skill_id") values (1,3);
+
+INSERT INTO keyword (title) VALUES ('Rock');
+INSERT INTO keyword (title) VALUES ('Comedy');
+
+INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (1,1);
+INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (2,2);
+
+INSERT INTO keyword_project("keyword_id", "project_id") VALUES (1,1);
+INSERT INTO keyword_project("keyword_id", "project_id") VALUES (2,2);

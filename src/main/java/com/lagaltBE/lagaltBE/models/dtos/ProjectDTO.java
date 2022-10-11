@@ -13,4 +13,5 @@ public class ProjectDTO {
     private Set<String> contributors;
     private Set<String> skills ;
     private int industry;
+    private Set<String> keywords;
 }

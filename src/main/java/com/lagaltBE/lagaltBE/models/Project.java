@@ -30,6 +30,8 @@ public class Project {
     @ManyToOne
     @JoinColumn
     private Industry industry;
+    @ManyToMany(mappedBy = "projects")
+    private Set<Keyword> keywords;
 
     public HashSet<Account> getAccounts() {
         HashSet<Account> accounts = new HashSet<>();
