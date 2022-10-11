@@ -18,9 +18,9 @@ public class Account {
     private String firstName;
     @Column(length = 50)
     private String lastName;
-    @Column(length = 50, nullable = false, unique = true)
+    @Column(length = 50, nullable = false) //, unique = true)
     private String username;
-    @Column(length = 100, nullable = false, unique = true)
+    @Column(length = 100, nullable = false) //, unique = true)
     private String email;
     @Column()
     private boolean visible;
