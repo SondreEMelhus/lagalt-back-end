@@ -46,3 +46,5 @@ INSERT INTO keyword_project("keyword_id", "project_id") VALUES (2,2);
 
 INSERT INTO application (account_id, project_id, motivation) VALUES (1,1,'I want to join this project');
 INSERT INTO application (account_id, project_id, motivation) VALUES (2,2,'This project seems cool');
+
+INSERT INTO chat ("text", "timestamp", "account_id", "project_id") VALUES ('Hei', '2022-10-12T08:10:10+00:00', 1, 1);

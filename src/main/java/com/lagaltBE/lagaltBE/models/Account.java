@@ -28,6 +28,8 @@ public class Account {
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "account")
     Set<Application> applications;
+    @OneToMany(mappedBy = "account")
+    Set<Chat> chats;
     @ManyToMany
     @JoinTable(
             name = "account_skill",
