@@ -50,13 +50,7 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public Account findByUsername(String username) {
-        // denne bør muligens endres til en sql spørring metode i repoen ( husk å max returnere 1 bruker)
-        Collection<Account> accounts = accountRepository.findAll();
-        for (Account a : accounts) {
-            if (a.getUsername() == username) {
-                return a;
-            }
-        }
-        return null;
+        return accountRepository.findByName(username);
     }
+
 }
