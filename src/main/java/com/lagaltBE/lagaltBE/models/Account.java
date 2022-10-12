@@ -37,7 +37,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     Set<StatusUpdateBoard> statusUpdateBoards;
     @OneToMany(mappedBy = "account")
-    Set<StatusUpdate> statusUpdate;
+    Set<StatusUpdate> statusUpdates;
+    @OneToMany(mappedBy = "account")
+    Set<ProjectInteractionHistory> projectInteractionHistory;
     @ManyToMany
     @JoinTable(
             name = "account_skill",

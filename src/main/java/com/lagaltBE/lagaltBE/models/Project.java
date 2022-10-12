@@ -29,6 +29,8 @@ public class Project {
     Set<MessageBoard> messageBoards;
     @OneToMany(mappedBy = "project")
     Set<StatusUpdateBoard> statusUpdateBoards;
+    @OneToMany(mappedBy = "project")
+    Set<ProjectInteractionHistory> projectInteractionHistory;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
