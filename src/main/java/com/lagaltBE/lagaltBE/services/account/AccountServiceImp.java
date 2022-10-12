@@ -1,6 +1,7 @@
 package com.lagaltBE.lagaltBE.services.account;
 
 import com.lagaltBE.lagaltBE.models.Account;
+import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -46,4 +47,10 @@ public class AccountServiceImp implements AccountService {
     public void delete(Account entity) {
         accountRepository.delete(entity);
     }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByName(username);
+    }
+
 }

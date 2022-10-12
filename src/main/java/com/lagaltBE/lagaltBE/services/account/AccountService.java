@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AccountService extends CrudService<Account, Integer> {
+    Account findByUsername(String username);
 }
