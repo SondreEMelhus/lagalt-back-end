@@ -21,6 +21,8 @@ public class Project {
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "project")
     Set<Application> applications;
+    @OneToMany(mappedBy = "project")
+    Set<Chat> chats;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
