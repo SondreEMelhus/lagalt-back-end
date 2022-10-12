@@ -17,6 +17,8 @@ public class Project {
     private String title;
     @Column(length = 500)
     private String description;
+    @Column(length = 100)
+    private String status;
     @OneToMany(mappedBy = "project")
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "project")
@@ -25,6 +27,8 @@ public class Project {
     Set<Chat> chats;
     @OneToMany(mappedBy = "project")
     Set<MessageBoard> messageBoards;
+    @OneToMany(mappedBy = "project")
+    Set<StatusUpdateBoard> statusUpdateBoards;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
