@@ -23,6 +23,8 @@ public class Project {
     Set<Application> applications;
     @OneToMany(mappedBy = "project")
     Set<Chat> chats;
+    @OneToMany(mappedBy = "project")
+    Set<MessageBoard> messageBoards;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
