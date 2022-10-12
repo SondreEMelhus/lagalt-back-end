@@ -80,7 +80,7 @@ public class KeywordController {
     @PostMapping
     public  ResponseEntity add(@RequestBody Keyword keyword) {
         Keyword newKeyword = keywordService.add(keyword);
-        URI location = URI.create("industries/" + newKeyword.getId());
+        URI location = URI.create("keywords/" + newKeyword.getId());
         return ResponseEntity.created(location).build();
     }
 

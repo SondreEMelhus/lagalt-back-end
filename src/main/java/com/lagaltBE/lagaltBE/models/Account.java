@@ -30,6 +30,10 @@ public class Account {
     Set<Application> applications;
     @OneToMany(mappedBy = "account")
     Set<Chat> chats;
+    @OneToMany(mappedBy = "account")
+    Set<MessageBoard> messageBoards;
+    @OneToMany(mappedBy = "account")
+    Set<Message> messages;
     @ManyToMany
     @JoinTable(
             name = "account_skill",

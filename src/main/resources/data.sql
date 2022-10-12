@@ -48,3 +48,11 @@ INSERT INTO application (account_id, project_id, motivation) VALUES (1,1,'I want
 INSERT INTO application (account_id, project_id, motivation) VALUES (2,2,'This project seems cool');
 
 INSERT INTO chat ("text", "timestamp", "account_id", "project_id") VALUES ('Hei', '2022-10-12T08:10:10+00:00', 1, 1);
+
+INSERT INTO message_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('React problemer', 'Jeg har problemer med React. Kan noen hjelpe meg?', '2022-10-12T08:10:10+00:00', 1, 1);
+INSERT INTO message_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('Møte', 'Skal vi ha et møte snart?', '2022-10-12T08:10:10+00:00', 2, 1);
+
+INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Nei', '2022-10-12T08:10:10+00:00', 1, 4);
+INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 1, 4);
+INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ok', '2022-10-12T08:10:10+00:00', 2, 4);
+INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 2, 3);
