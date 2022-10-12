@@ -6,6 +6,7 @@ import com.lagaltBE.lagaltBE.mappers.*;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
+import com.lagaltBE.lagaltBE.services.contributor.ContributorService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;
@@ -32,14 +33,18 @@ public class ProjectController {
     private final SkillService skillService;
     private final IndustryMapper industryMapper;
     private final KeywordMapper keywordMapper;
+    private final ContributorService contributorService;
+    private final ContributorMapper contributorMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper, ContributorService contributorService, ContributorMapper contributorMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
         this.industryMapper = industryMapper;
         this.keywordMapper = keywordMapper;
+        this.contributorService = contributorService;
+        this.contributorMapper = contributorMapper;
     }
 
     @Operation(summary = "Get all projects")
@@ -260,5 +265,24 @@ public class ProjectController {
     public ResponseEntity getProjectKeywords(@PathVariable int id){
         Project project = projectService.findById(id);
         return ResponseEntity.ok(keywordMapper.keywordToKeywordDto(project.getKeywords()));
+    }
+
+    @Operation(summary = "Get contributors of a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such project",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/contributors")
+    public ResponseEntity getProjectContributors(@PathVariable int id){
+        Project project = projectService.findById(id);
+        return ResponseEntity.ok(contributorMapper.contributorToContributorDto(project.getContributors()));
     }
 }

@@ -13,7 +13,7 @@ public class Contributor {
     private int id;
     // bør endres til enum!!!!!!
     @Column(length = 50)
-    private String role;
+    private String role; // is either 'Owner', 'Admin' or 'Member'
     @ManyToOne
     @JoinColumn
     private Account account;

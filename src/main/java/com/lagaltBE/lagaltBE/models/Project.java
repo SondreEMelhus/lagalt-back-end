@@ -17,7 +17,6 @@ public class Project {
     private String title;
     @Column(length = 500)
     private String description;
-
     @OneToMany(mappedBy = "project")
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "project")
