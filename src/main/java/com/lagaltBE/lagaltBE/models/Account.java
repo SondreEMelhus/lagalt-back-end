@@ -34,6 +34,10 @@ public class Account {
     Set<MessageBoard> messageBoards;
     @OneToMany(mappedBy = "account")
     Set<Message> messages;
+    @OneToMany(mappedBy = "account")
+    Set<StatusUpdateBoard> statusUpdateBoards;
+    @OneToMany(mappedBy = "account")
+    Set<StatusUpdate> statusUpdate;
     @ManyToMany
     @JoinTable(
             name = "account_skill",
