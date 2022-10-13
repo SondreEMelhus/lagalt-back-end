@@ -7,6 +7,5 @@ public class MessageDTO {
     private int id;
     private String text;
     private String timestamp;
-    private String firstName;
-    private String lastName;
+    private String username;
 }

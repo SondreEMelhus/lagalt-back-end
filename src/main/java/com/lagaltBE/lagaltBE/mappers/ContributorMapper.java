@@ -14,13 +14,13 @@ import java.util.Collection;
 @Mapper(componentModel = "spring")
 public abstract class ContributorMapper {
 
-    @Mapping(target = "account", source = "account", qualifiedByName = "accountToString")
+    @Mapping(target = "username", source = "account", qualifiedByName = "accountToUsername")
     public abstract ContributorDTO contributorToContributorDto(Contributor contributor);
 
     public abstract Collection<ContributorDTO> contributorToContributorDto(Collection<Contributor> contributors);
 
-    @Named("accountToString")
-    String mapAccountToString(Account source) {
+    @Named("accountToUsername")
+    String mapAccountToUsername(Account source) {
         return source.getUsername();
     }
 }

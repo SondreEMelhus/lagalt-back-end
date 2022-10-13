@@ -12,19 +12,13 @@ import java.util.Collection;
 @Mapper(componentModel = "spring")
 public abstract class MessageMapper {
 
-    @Mapping(target = "firstName", source = "account", qualifiedByName = "accountToFirstName")
-    @Mapping(target = "lastName", source = "account", qualifiedByName = "accountToLastName")
+    @Mapping(target = "username", source = "account", qualifiedByName = "accountToUserName")
     public abstract MessageDTO messageToMessageDto(Message message);
 
     public abstract Collection<MessageDTO> messageToMessageDto(Collection<Message> message);
 
-    @Named("accountToFirstName")
-    String mapAccountToFirstName(Account source) {
-        return source.getFirstName();
-    }
-
-    @Named("accountToLastName")
-    String mapAccountToLastName(Account source) {
-        return source.getLastName();
+    @Named("accountToUserName")
+    String mapAccountToUserName(Account source) {
+        return source.getUsername();
     }
 }

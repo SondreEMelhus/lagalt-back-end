@@ -24,10 +24,7 @@ public abstract class IndustryMapper {
     public abstract IndustryDTO industryToIndustryDto(Industry industry);
 
     public abstract Collection<IndustryDTO> industryToIndustryDto(Collection<Industry> industries);
-/*
-    @Mapping(target = "projects", source = "projects", qualifiedByName = "projectsIdsToProjects")
-    public abstract Industry industryDtoToIndustry(IndustryDTO dto);
-*/
+
     @Named("projectsToIds")
     Set<Integer> mapProjectsToIds(Set<Project> projects) {
         if (projects == null) return null;

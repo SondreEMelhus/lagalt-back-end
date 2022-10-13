@@ -11,19 +11,13 @@ import java.util.Collection;
 
 @Mapper(componentModel = "spring")
 public abstract class StatusUpdateMapper {
-    @Mapping(target = "firstName", source = "account", qualifiedByName = "accountToFirstName")
-    @Mapping(target = "lastName", source = "account", qualifiedByName = "accountToLastName")
+    @Mapping(target = "username", source = "account", qualifiedByName = "accountToUsername")
     public abstract StatusUpdateDTO statusUpdateToStatusUpdateDto(StatusUpdate statusUpdate);
 
     public abstract Collection<StatusUpdateDTO> statusUpdateToStatusUpdateDto(Collection<StatusUpdate> statusUpdate);
 
-    @Named("accountToFirstName")
-    String mapAccountToFirstName(Account source) {
-        return source.getFirstName();
-    }
-
-    @Named("accountToLastName")
-    String mapAccountToLastName(Account source) {
-        return source.getLastName();
+    @Named("accountToUsername")
+    String mapAccountToUsername(Account source) {
+        return source.getUsername();
     }
 }

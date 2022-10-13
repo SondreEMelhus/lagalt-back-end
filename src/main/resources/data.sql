@@ -10,12 +10,12 @@ insert into project (title, industry_id) values ('skating', 4);
 insert into project (title, industry_id) values ('surfing', 1);
 insert into project (title, industry_id) values ('trainspotting', 2);
 
-insert into account (first_name, last_name, username, email, visible) values ('Ulrik', 'Lunde', 'ulrik', 'ulrik@gmail.com', true);          -- 1
-insert into account (first_name, last_name, username, email, visible) values ('Trygve', 'Johannessen', 'tj', 'tj@gmail.com', true);
-insert into account (first_name, last_name, username, email, visible) values ('Karoline', 'Øijorden', 'karo', 'karo@gmail.com', true);
-insert into account (first_name, last_name, username, email, visible) values ('Sondre', 'Melhus', 'sondre', 'sondre@gmail.com', true);
-insert into account (first_name, last_name, username, email, visible) values ('Egil', 'Olsen', 'drillo', 'drillo@gmail.com', true);
-insert into account (first_name, last_name, username, email, visible) values ('Ole Gunnar', 'Solskjær', 'ole-g', 'ole-g@gmail.com', true);
+insert into account (username, visible) values ('ulrik', true);          -- 1
+insert into account (username, visible) values ('tj', true);
+insert into account (username, visible) values ('Karoline', true);
+insert into account (username, visible) values ('Sondre', true);
+insert into account (username, visible) values ('drillo', true);
+insert into account (username, visible) values ('Ole Gunnar', true);
 
 insert into contributor (account_id, project_id, role) values (1,1,'owner');
 insert into contributor (account_id, project_id, role) values (2,1,'member');

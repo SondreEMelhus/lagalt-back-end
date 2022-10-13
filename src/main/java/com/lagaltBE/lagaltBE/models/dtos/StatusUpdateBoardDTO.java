@@ -8,6 +8,5 @@ public class StatusUpdateBoardDTO {
     private String title;
     private String text;
     private String timestamp;
-    private String firstName;
-    private String lastName;
+    private String username;
 }

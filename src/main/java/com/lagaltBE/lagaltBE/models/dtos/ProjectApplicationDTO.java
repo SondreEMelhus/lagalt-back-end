@@ -6,6 +6,5 @@ import lombok.Data;
 public class ProjectApplicationDTO {
     private int id;
     private String motivation;
-    private String firstName;
-    private String lastName;
+    private String username;
 }
