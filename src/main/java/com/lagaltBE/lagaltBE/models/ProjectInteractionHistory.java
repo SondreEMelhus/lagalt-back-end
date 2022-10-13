@@ -2,23 +2,21 @@ package com.lagaltBE.lagaltBE.models;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
-public class StatusUpdate {
+@Entity
+public class ProjectInteractionHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column()
-    private String text;
-    @Column()
+    @Column(length=100)
     private String timestamp;
     @ManyToOne
     @JoinColumn
-    private StatusUpdateBoard statusUpdateBoard;
-    @Column(length=100)
-    private String username;
+    private Account account;
+    @ManyToOne
+    @JoinColumn
+    private Project project;
 }

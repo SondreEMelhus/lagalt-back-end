@@ -73,27 +73,6 @@ public class MessageBoardController {
         return ResponseEntity.ok(messageBoardDTO);
     }
 
-    @Operation(summary = "Updates a message board")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Message board successfully updated",
-                    content = @Content),
-            @ApiResponse(responseCode = "400",
-                    description = "Malformed request",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
-            @ApiResponse(responseCode = "404",
-                    description = "Message board not found with supplied ID",
-                    content = @Content)
-    })
-    @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody MessageBoard messageBoard, @PathVariable int id) {
-        if (id != messageBoard.getId())
-            return ResponseEntity.badRequest().build();
-        messageBoardService.update(messageBoard);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Add a message board")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",

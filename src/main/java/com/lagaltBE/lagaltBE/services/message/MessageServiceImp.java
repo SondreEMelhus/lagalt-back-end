@@ -1,7 +1,6 @@
 package com.lagaltBE.lagaltBE.services.message;
 
 import com.lagaltBE.lagaltBE.models.Message;
-import com.lagaltBE.lagaltBE.models.MessageBoard;
 import com.lagaltBE.lagaltBE.repositories.MessageRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class MessageServiceImp implements MessageService {
 
     @Override
     public Message findById(Integer id) {
-        return messageRepository.findById(id).get();
+        return null;
     }
 
     @Override
@@ -33,16 +32,14 @@ public class MessageServiceImp implements MessageService {
 
     @Override
     public Message update(Message entity) {
-        return messageRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        messageRepository.deleteById(id);
     }
 
     @Override
     public void delete(Message entity) {
-        messageRepository.delete(entity);
     }
 }

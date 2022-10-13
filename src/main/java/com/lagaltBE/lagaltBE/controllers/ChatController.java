@@ -53,25 +53,6 @@ public class ChatController {
         return ResponseEntity.ok(chats.stream().map(chatMapper::chatToChatDto));
     }
 
-    @Operation(summary = "Get a chat by ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "Success",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = AccountDTO.class)) }),
-            @ApiResponse(responseCode = "500",
-                    description = "Chat does not exist with supplied ID",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @GetMapping("{id}")
-    public ResponseEntity<ChatDTO> getById(@PathVariable int id) {
-        ChatDTO chat = chatMapper.chatToChatDto(
-                chatService.findById(id)
-        );
-        return ResponseEntity.ok(chat);
-    }
-
     @Operation(summary = "Add a chat to a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",

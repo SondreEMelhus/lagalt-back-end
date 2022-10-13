@@ -33,16 +33,16 @@ public class SkillServiceImp implements SkillService {
 
     @Override
     public Skill update(Skill entity) {
-        return skillRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        skillRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(Skill entity) {
-        skillRepository.delete(entity);
+
     }
 }

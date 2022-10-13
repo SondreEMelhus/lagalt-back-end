@@ -85,27 +85,6 @@ public class IndustryController {
         return ResponseEntity.created(location).build();
     }
 
-    @Operation(summary = "Updates a industry")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Industry successfully updated",
-                    content = @Content),
-            @ApiResponse(responseCode = "400",
-                    description = "Malformed request",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
-            @ApiResponse(responseCode = "404",
-                    description = "Industry not found with supplied ID",
-                    content = @Content)
-    })
-    @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody Industry industry, @PathVariable int id) {
-        if (id != industry.getId())
-            return ResponseEntity.badRequest().build();
-        industryService.update(industry);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Delete a industry")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",

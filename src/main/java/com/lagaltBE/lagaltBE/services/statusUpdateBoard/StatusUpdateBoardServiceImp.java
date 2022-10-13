@@ -22,7 +22,7 @@ public class StatusUpdateBoardServiceImp implements StatusUpdateBoardService {
 
     @Override
     public Collection<StatusUpdateBoard> findAll() {
-        return statusUpdateBoardRepository.findAll();
+        return null;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class StatusUpdateBoardServiceImp implements StatusUpdateBoardService {
 
     @Override
     public void deleteById(Integer id) {
-        statusUpdateBoardRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(StatusUpdateBoard entity) {
-        statusUpdateBoardRepository.delete(entity);
+
     }
 }
