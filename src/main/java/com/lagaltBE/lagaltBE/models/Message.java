@@ -18,7 +18,6 @@ public class Message {
     @ManyToOne
     @JoinColumn
     private MessageBoard messageBoard;
-    @ManyToOne
-    @JoinColumn
-    private Account account;
+    @Column(length=100)
+    private String username;
 }

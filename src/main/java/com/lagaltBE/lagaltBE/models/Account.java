@@ -23,16 +23,6 @@ public class Account {
     @OneToMany(mappedBy = "account")
     Set<Application> applications;
     @OneToMany(mappedBy = "account")
-    Set<Chat> chats;
-    @OneToMany(mappedBy = "account")
-    Set<MessageBoard> messageBoards;
-    @OneToMany(mappedBy = "account")
-    Set<Message> messages;
-    @OneToMany(mappedBy = "account")
-    Set<StatusUpdateBoard> statusUpdateBoards;
-    @OneToMany(mappedBy = "account")
-    Set<StatusUpdate> statusUpdates;
-    @OneToMany(mappedBy = "account")
     Set<ProjectInteractionHistory> projectInteractionHistory;
     @ManyToMany
     @JoinTable(

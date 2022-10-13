@@ -69,27 +69,6 @@ public class StatusUpdateController {
         return ResponseEntity.ok(statusUpdates.stream().map(statusUpdateMapper::statusUpdateToStatusUpdateDto));
     }
 
-    @Operation(summary = "Updates a status update")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Status update successfully updated",
-                    content = @Content),
-            @ApiResponse(responseCode = "400",
-                    description = "Malformed request",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
-            @ApiResponse(responseCode = "404",
-                    description = "Status update not found with supplied ID",
-                    content = @Content)
-    })
-    @PutMapping("{id}")
-    public ResponseEntity update(@RequestBody StatusUpdate statusUpdate, @PathVariable int id) {
-        if (id != statusUpdate.getId())
-            return ResponseEntity.badRequest().build();
-        statusUpdateService.update(statusUpdate);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Add a status update")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",

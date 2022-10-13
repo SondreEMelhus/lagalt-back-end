@@ -32,16 +32,16 @@ public class StatusUpdateServiceImp implements StatusUpdateService{
 
     @Override
     public StatusUpdate update(StatusUpdate entity) {
-        return statusUpdateRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        statusUpdateRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(StatusUpdate entity) {
-        statusUpdateRepository.delete(entity);
+
     }
 }

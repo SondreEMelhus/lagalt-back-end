@@ -2,9 +2,7 @@ package com.lagaltBE.lagaltBE.mappers;
 
 import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.Contributor;
-import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.models.dtos.ContributorDTO;
-import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

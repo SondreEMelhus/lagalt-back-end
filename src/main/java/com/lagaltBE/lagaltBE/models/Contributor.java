@@ -11,7 +11,6 @@ public class Contributor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    // bør endres til enum!!!!!!
     @Column(length = 50)
     private String role; // is either 'Owner', 'Admin' or 'Member'
     @ManyToOne

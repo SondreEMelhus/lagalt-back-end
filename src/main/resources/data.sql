@@ -47,19 +47,19 @@ INSERT INTO keyword_project("keyword_id", "project_id") VALUES (2,2);
 INSERT INTO application (account_id, project_id, motivation) VALUES (1,1,'I want to join this project');
 INSERT INTO application (account_id, project_id, motivation) VALUES (2,2,'This project seems cool');
 
-INSERT INTO chat ("text", "timestamp", "account_id", "project_id") VALUES ('Hei', '2022-10-12T08:10:10+00:00', 1, 1);
+INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Hei', '2022-10-12T08:10:10+00:00', 'ulrik', 1);
 
-INSERT INTO message_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('React problemer', 'Kan noen hjelpe meg med React?', '2022-10-12T08:10:10+00:00', 1, 1);
-INSERT INTO message_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('Møte', 'Skal vi ha et møte snart?', '2022-10-12T08:10:10+00:00', 2, 1);
+INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('React problemer', 'Kan noen hjelpe meg med React?', '2022-10-12T08:10:10+00:00', 'ulrik', 1);
+INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('Møte', 'Skal vi ha et møte snart?', '2022-10-12T08:10:10+00:00', 'tj', 1);
 
-INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Nei', '2022-10-12T08:10:10+00:00', 1, 4);
-INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 1, 4);
-INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ok', '2022-10-12T08:10:10+00:00', 2, 4);
-INSERT INTO message ("text", "timestamp", "message_board_id", "account_id") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 2, 3);
+INSERT INTO message ("text", "timestamp", "message_board_id", "username") VALUES ('Nei', '2022-10-12T08:10:10+00:00', 1, 'Sondre');
+INSERT INTO message ("text", "timestamp", "message_board_id", "username") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 1, 'Sondre');
+INSERT INTO message ("text", "timestamp", "message_board_id", "username") VALUES ('Ok', '2022-10-12T08:10:10+00:00', 2, 'Sondre');
+INSERT INTO message ("text", "timestamp", "message_board_id", "username") VALUES ('Ja', '2022-10-12T08:10:10+00:00', 2, 'Karoline');
 
-INSERT INTO status_update_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('Version 1', 'Frontend og backend er koblet sammen', '2022-10-12T08:10:10+00:00', 1, 1);
-INSERT INTO status_update_board ("title", "text", "timestamp", "account_id", "project_id") VALUES ('Version 2', 'Vi har en fungerende chat', '2022-10-12T08:10:10+00:00', 4, 1);
+INSERT INTO status_update_board ("title", "text", "timestamp", "username", "project_id") VALUES ('Version 1', 'Frontend og backend er koblet sammen', '2022-10-12T08:10:10+00:00', 'Sondre', 1);
+INSERT INTO status_update_board ("title", "text", "timestamp", "username", "project_id") VALUES ('Version 2', 'Vi har en fungerende chat', '2022-10-12T08:10:10+00:00', 'Sondre', 1);
 
-INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "account_id") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 1, 4);
-INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "account_id") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 2, 4);
-INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "account_id") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 2, 3);
+INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "username") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 1, 'Karoline');
+INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "username") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 2, 'tj');
+INSERT INTO status_update ("text", "timestamp", "status_update_board_id", "username") VALUES ('Bra jobbet!', '2022-10-12T08:10:10+00:00', 2, 'ulrik');

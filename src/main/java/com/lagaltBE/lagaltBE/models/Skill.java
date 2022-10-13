@@ -19,4 +19,7 @@ public class Skill {
     private Set<Account> accounts;
     @ManyToMany(mappedBy = "skills")
     private Set<Project> projects;
+    @ManyToOne
+    @JoinColumn
+    private Industry industry;
 }

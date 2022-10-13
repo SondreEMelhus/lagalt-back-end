@@ -36,11 +36,11 @@ public class ProjectInteractionHistoryServiceImp implements ProjectInteractionHi
 
     @Override
     public void deleteById(Integer id) {
-        projectInteractionHistoryRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(ProjectInteractionHistory entity) {
-        projectInteractionHistoryRepository.delete(entity);
+
     }
 }

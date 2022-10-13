@@ -40,12 +40,12 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public void deleteById(Integer id) {
-        accountRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(Account entity) {
-        accountRepository.delete(entity);
+
     }
 
     @Override

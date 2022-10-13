@@ -18,4 +18,6 @@ public class Industry {
     private Set<Project> projects;
     @ManyToMany(mappedBy = "industries")
     private Set<Keyword> keywords;
+    @OneToMany(mappedBy = "industry")
+    private Set<Skill> skills;
 }

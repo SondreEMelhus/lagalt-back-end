@@ -30,16 +30,16 @@ public class IndustryServiceImp implements IndustryService {
 
     @Override
     public Industry update(Industry entity) {
-        return industryRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        industryRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(Industry entity) {
-        industryRepository.delete(entity);
+
     }
 }

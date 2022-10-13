@@ -19,7 +19,6 @@ public class StatusUpdate {
     @ManyToOne
     @JoinColumn
     private StatusUpdateBoard statusUpdateBoard;
-    @ManyToOne
-    @JoinColumn
-    private Account account;
+    @Column(length=100)
+    private String username;
 }

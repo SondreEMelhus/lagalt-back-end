@@ -7,5 +7,4 @@ import java.util.Set;
 public class SkillDTO {
     private int id;
     private String title;
-    private Set<Integer> accounts;
 }
