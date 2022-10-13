@@ -17,6 +17,8 @@ public class Project {
     private String title;
     @Column(length = 500)
     private String description;
+    @Column(length = 100)
+    private String status;
     @OneToMany(mappedBy = "project")
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "project")
@@ -25,6 +27,10 @@ public class Project {
     Set<Chat> chats;
     @OneToMany(mappedBy = "project")
     Set<MessageBoard> messageBoards;
+    @OneToMany(mappedBy = "project")
+    Set<StatusUpdateBoard> statusUpdateBoards;
+    @OneToMany(mappedBy = "project")
+    Set<ProjectInteractionHistory> projectInteractionHistory;
     @ManyToMany
     @JoinTable(
             name = "skill_project",
@@ -37,20 +43,4 @@ public class Project {
     private Industry industry;
     @ManyToMany(mappedBy = "projects")
     private Set<Keyword> keywords;
-
-    public HashSet<Account> getAccounts() {
-        HashSet<Account> accounts = new HashSet<>();
-        for (Contributor c: contributors) {
-            accounts.add(c.getAccount());
-        }
-        return accounts;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", name='" + title + '\'' +
-                '}';
-    }
 }

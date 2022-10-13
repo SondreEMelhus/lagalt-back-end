@@ -11,45 +11,45 @@ import java.util.Set;
 @Service
 public class ProjectServiceImp implements ProjectService {
 
-    private final ProjectRepository projectRepostiory;
+    private final ProjectRepository projectRepository;
 
-    public ProjectServiceImp(ProjectRepository projectRepostiory) {
-        this.projectRepostiory = projectRepostiory;
+    public ProjectServiceImp(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
     }
 
     @Override
     public Project findById(Integer integer) {
-        return projectRepostiory.findById(integer).get();
+        return projectRepository.findById(integer).get();
     }
 
     @Override
     public Collection<Project> findAll() {
-        return projectRepostiory.findAll();
+        return projectRepository.findAll();
     }
 
     @Override
     public Project add(Project entity) {
-        return projectRepostiory.save(entity);
+        return projectRepository.save(entity);
     }
 
     @Override
     public Project update(Project entity) {
-        return projectRepostiory.save(entity);
+        return projectRepository.save(entity);
     }
 
     @Override
     public void deleteById(Integer integer) {
-        projectRepostiory.deleteById(integer);
+
     }
 
     @Override
     public void delete(Project entity) {
-        projectRepostiory.delete(entity);
+
     }
 
     @Override
     public Collection<Project> findAllByName(String name) {
-        return projectRepostiory.findAllByName(name);
+        return projectRepository.findAllByName(name);
     }
 
 }

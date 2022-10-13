@@ -8,5 +8,4 @@ public class KeywordDTO {
     private int id;
     private String title;
     private Set<String> industries;
-    private Set<String> projects;
 }

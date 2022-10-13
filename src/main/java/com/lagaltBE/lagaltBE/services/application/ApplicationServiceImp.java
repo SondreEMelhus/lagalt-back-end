@@ -36,11 +36,11 @@ public class ApplicationServiceImp implements ApplicationService {
 
     @Override
     public void deleteById(Integer id) {
-        applicationRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(Application entity) {
-        applicationRepository.delete(entity);
+
     }
 }

@@ -16,7 +16,7 @@ public class ChatServiceImp implements ChatService {
 
     @Override
     public Chat findById(Integer id) {
-        return chatRepository.findById(id).get();
+        return null;
     }
 
     @Override
@@ -31,16 +31,16 @@ public class ChatServiceImp implements ChatService {
 
     @Override
     public Chat update(Chat entity) {
-        return chatRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        chatRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(Chat entity) {
-        chatRepository.delete(entity);
+
     }
 }

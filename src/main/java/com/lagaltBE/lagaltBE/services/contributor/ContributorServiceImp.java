@@ -37,12 +37,12 @@ public class ContributorServiceImp implements ContributorService {
 
     @Override
     public void deleteById(Integer integer) {
-        contributorRepository.deleteById(integer);
+
     }
 
     @Override
     public void delete(Contributor entity) {
-        contributorRepository.delete(entity);
+
     }
 }
 

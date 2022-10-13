@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class AccountApplicationDTO {
-    private String project;
+    private String projectTitle;
+    private String status;
 }

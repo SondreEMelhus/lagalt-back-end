@@ -31,16 +31,14 @@ public class KeywordServiceImp implements KeywordService {
 
     @Override
     public Keyword update(Keyword entity) {
-        return keywordRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        keywordRepository.deleteById(id);
     }
 
     @Override
     public void delete(Keyword entity) {
-        keywordRepository.delete(entity);
     }
 }

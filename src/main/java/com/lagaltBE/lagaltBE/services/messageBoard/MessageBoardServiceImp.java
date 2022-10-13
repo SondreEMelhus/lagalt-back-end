@@ -22,7 +22,7 @@ public class MessageBoardServiceImp implements MessageBoardService {
 
     @Override
     public Collection<MessageBoard> findAll() {
-        return messageBoardRepository.findAll();
+        return null;
     }
 
     @Override
@@ -32,16 +32,16 @@ public class MessageBoardServiceImp implements MessageBoardService {
 
     @Override
     public MessageBoard update(MessageBoard entity) {
-        return messageBoardRepository.save(entity);
+        return null;
     }
 
     @Override
     public void deleteById(Integer id) {
-        messageBoardRepository.deleteById(id);
+
     }
 
     @Override
     public void delete(MessageBoard entity) {
-        messageBoardRepository.delete(entity);
+
     }
 }

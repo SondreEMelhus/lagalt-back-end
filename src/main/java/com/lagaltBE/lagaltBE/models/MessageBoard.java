@@ -18,9 +18,8 @@ public class MessageBoard {
     private String text;
     @Column()
     private String timestamp;
-    @ManyToOne
-    @JoinColumn
-    private Account account;
+    @Column(length=100)
+    private String username;
     @ManyToOne
     @JoinColumn
     private Project project;
