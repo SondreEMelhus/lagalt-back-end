@@ -1,7 +1,16 @@
+INSERT INTO keyword (title) VALUES ('Rock');
+INSERT INTO keyword (title) VALUES ('Komedie');
+INSERT INTO keyword (title) VALUES ('Musikal');
+
 INSERT INTO industry (title) VALUES ('Musikk'); --1
 INSERT INTO industry (title) VALUES ('Film'); --2
 INSERT INTO industry (title) VALUES ('Spillutvikling'); --3
 INSERT INTO industry (title) VALUES ('Webutvikling'); --4
+
+INSERT INTO skill (title, industry_id) VALUES ('Java', 3);
+INSERT INTO skill (title, industry_id) VALUES ('Design', 3);
+INSERT INTO skill (title, industry_id) VALUES ('Gitar', 1);
+INSERT INTO skill (title, industry_id) VALUES ('Trommer', 1);
 
 insert into project (title, industry_id) values ('bygge legat app', 1);
 insert into project (title, industry_id) values ('fotballlag', 2);
@@ -24,10 +33,6 @@ insert into contributor (account_id, project_id, role) values (4,1,'member');
 insert into contributor (account_id, project_id, role) values (5,2,'owner');
 insert into contributor (account_id, project_id, role) values (6,2,'member');
 
-INSERT INTO skill (title) VALUES ('Java');
-INSERT INTO skill (title) VALUES ('Design');
-INSERT INTO skill (title) VALUES ('Kaffe');
-
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,1);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,2);
 
@@ -35,10 +40,9 @@ insert into skill_project ("project_id", "skill_id") values (1,1);
 insert into skill_project ("project_id", "skill_id") values (1,2);
 insert into skill_project ("project_id", "skill_id") values (1,3);
 
-INSERT INTO keyword (title) VALUES ('Rock');
-INSERT INTO keyword (title) VALUES ('Comedy');
-
 INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (1,1);
+INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (2,1);
+INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (3,1);
 INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (2,2);
 
 INSERT INTO keyword_project("keyword_id", "project_id") VALUES (1,1);
