@@ -18,6 +18,8 @@ public class Account {
     private boolean visible;
     @Column(length = 200)
     private String description;
+    @Column(length = 200)
+    private String portfolio;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "account")
