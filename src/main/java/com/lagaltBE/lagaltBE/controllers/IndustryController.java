@@ -2,6 +2,7 @@ package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.IndustryMapper;
 import com.lagaltBE.lagaltBE.mappers.KeywordMapper;
+import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
@@ -25,11 +26,13 @@ public class IndustryController {
     private final IndustryService industryService;
     private final IndustryMapper industryMapper;
     private final KeywordMapper keywordMapper;
+    private final SkillMapper skillMapper;
 
-    public IndustryController(IndustryService industryService, IndustryMapper industryMapper, KeywordMapper keywordMapper) {
+    public IndustryController(IndustryService industryService, IndustryMapper industryMapper, KeywordMapper keywordMapper, SkillMapper skillMapper) {
         this.industryService = industryService;
         this.industryMapper = industryMapper;
         this.keywordMapper = keywordMapper;
+        this.skillMapper = skillMapper;
     }
 
     @Operation(summary = "Get all industries")
@@ -118,5 +121,24 @@ public class IndustryController {
     public ResponseEntity getIndustryKeywords(@PathVariable int id){
         Industry industry = industryService.findById(id);
         return ResponseEntity.ok(keywordMapper.keywordToKeywordDto(industry.getKeywords()));
+    }
+
+    @Operation(summary = "Get skills of a industry")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such industry",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/skill")
+    public ResponseEntity getIndustrySkills(@PathVariable int id){
+        Industry industry = industryService.findById(id);
+        return ResponseEntity.ok(skillMapper.skillToSkillDto(industry.getSkills()));
     }
 }

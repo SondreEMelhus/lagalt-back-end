@@ -13,6 +13,8 @@ public class ProjectInteractionHistory {
     private int id;
     @Column(length=100)
     private String timestamp;
+    @Column()
+    private Boolean visited;
     @ManyToOne
     @JoinColumn
     private Account account;

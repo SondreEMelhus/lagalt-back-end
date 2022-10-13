@@ -91,7 +91,7 @@ public class AccountController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorResponse.class))})
     })
-    @GetMapping("search") // GET: localhost:8080/api/v1/characters/1
+    @GetMapping("search") // GET: localhost:8080/api/v1/accounts/search
     public ResponseEntity<AccountDTO> findByName(@RequestParam String username){
         AccountDTO dto = accountMapper.accountToAccountDto(
                 accountService.findByUsername(username)
