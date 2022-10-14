@@ -4,6 +4,7 @@ import com.lagaltBE.lagaltBE.mappers.ChatMapper;
 import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.Chat;
 import com.lagaltBE.lagaltBE.models.Project;
+import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ChatDTO;
 import com.lagaltBE.lagaltBE.services.chat.ChatService;
@@ -63,10 +64,13 @@ public class ChatController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @PostMapping
-    public  ResponseEntity add(@RequestBody Chat chat) {
-        Chat newChat = chatService.add(chat);
-        URI location = URI.create("chats/" + newChat.getId());
-        return ResponseEntity.created(location).build();
+    @PostMapping("/{projectId}/addChat")
+    public  ResponseEntity add(@PathVariable int projectId, @RequestBody Chat chat) {
+        Project project = projectService.findById(projectId);
+        Set<Chat> chats = project.getChats();
+        chats.add(chat);
+        project.setChats(chats);
+        projectService.update(project);
+        return ResponseEntity.noContent().build();
     }
 }
