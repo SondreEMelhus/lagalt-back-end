@@ -35,7 +35,7 @@ public class FilterAlgorithm {
         int filterSelection = 0;
         List<Project> filteredProjects = new ArrayList<>();
 
-        if (selectedIndustry.getTitle().equals("Industri") || selectedIndustry.getTitle().equals("Alle industrier")) { filterSelection += 1; }
+        if (selectedIndustry.getTitle().equals("Industri")) { filterSelection += 1; }
         if (selectedKeyword.getTitle().equals("Nøkkelord")) { filterSelection += 2; }
         if (selectedSkill.getTitle().equals("Ferdighet")) { filterSelection += 4; }
 
