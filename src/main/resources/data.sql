@@ -63,9 +63,9 @@ INSERT INTO keyword (title) VALUES ('Open world');
 INSERT INTO keyword (title) VALUES ('Sport');
 INSERT INTO keyword (title) VALUES ('Skyting');
 INSERT INTO keyword (title) VALUES ('Mutliplayer');
-INSERT INTO keyword (title) VALUES ('Singleplayer'); -- 17
-INSERT INTO keyword (title) VALUES ('RPG');
-INSERT INTO keyword (title) VALUES ('Sosiale medier'); --19
+INSERT INTO keyword (title) VALUES ('Singleplayer'); -- 18
+INSERT INTO keyword (title) VALUES ('RPG'); --19
+INSERT INTO keyword (title) VALUES ('Sosiale medier'); --20
 INSERT INTO keyword (title) VALUES ('Nettbutikk');
 INSERT INTO keyword (title) VALUES ('Hjemmeside');
 INSERT INTO keyword (title) VALUES ('Blogg');
@@ -144,7 +144,7 @@ INSERT INTO keyword_project("project_id", "keyword_id") VALUES (1,12);
 INSERT INTO keyword_project("project_id", "keyword_id") VALUES (1,17);
 -- project 2 'Treningsapp'
 INSERT INTO keyword_project("project_id", "keyword_id") VALUES (2,11);
-INSERT INTO keyword_project("project_id", "keyword_id") VALUES (2,19);
+INSERT INTO keyword_project("project_id", "keyword_id") VALUES (2,20);
 -- project 3 'Konsert'
 INSERT INTO keyword_project("project_id", "keyword_id") VALUES (3,2);
 INSERT INTO keyword_project("project_id", "keyword_id") VALUES (3,3);
@@ -154,7 +154,7 @@ INSERT INTO keyword_project("project_id", "keyword_id") VALUES (4,8);
 -- project 5 'The room 2'
 INSERT INTO keyword_project("project_id", "keyword_id") VALUES (5,1);
 -- project 6 'Alumini'
-INSERT INTO keyword_project("project_id", "keyword_id") VALUES (6,19);
+INSERT INTO keyword_project("project_id", "keyword_id") VALUES (6,20);
 -- project 7 'Reklame for treningsklær'
 INSERT INTO keyword_project ("project_id", "keyword_id") values (7,9);
 INSERT INTO keyword_project ("project_id", "keyword_id") values (7,10);
@@ -201,6 +201,8 @@ INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Jeg f�
 INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Tror du må fikse noe i annotasjonene', '2022-10-14T10:11:10+00:00', 'Sondre', 1);
 INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Det fungerte', '2022-10-14T10:20:10+00:00', 'Karoline', 1);
 INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Supert', '2022-10-14T10:25:10+00:00', 'Sondre', 1);
+INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Skal vi bruke React eller Angular?', '2022-10-14T10:25:10+00:00', 'Mette', 2);
+INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Jeg liker best React', '2022-10-14T10:30:10+00:00', 'Synnøve', 2);
 
 --create message boards
 INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('React problemer', 'Kan noen hjelpe meg med React?', '2022-10-12T08:10:10+00:00', 'Ulrik', 1);
