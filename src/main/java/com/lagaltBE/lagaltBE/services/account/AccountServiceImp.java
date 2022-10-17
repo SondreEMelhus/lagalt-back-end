@@ -1,7 +1,7 @@
 package com.lagaltBE.lagaltBE.services.account;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Account;
-import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +18,7 @@ public class AccountServiceImp implements AccountService {
     
     @Override
     public Account findById(Integer id) {
-        // TODO add or else throw UserAccountNotFoundException like this: or find another solution
-        // return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
-        return accountRepository.findById(id).get();
+        return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
@@ -40,17 +38,14 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public void deleteById(Integer id) {
-
     }
 
     @Override
     public void delete(Account entity) {
-
     }
 
     @Override
     public Account findByUsername(String username) {
         return accountRepository.findByName(username);
     }
-
 }

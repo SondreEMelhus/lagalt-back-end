@@ -1,12 +1,9 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.MessageBoardMapper;
-import com.lagaltBE.lagaltBE.models.Keyword;
 import com.lagaltBE.lagaltBE.models.MessageBoard;
 import com.lagaltBE.lagaltBE.models.Project;
-import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
-import com.lagaltBE.lagaltBE.models.dtos.KeywordDTO;
 import com.lagaltBE.lagaltBE.models.dtos.MessageBoardDTO;
 import com.lagaltBE.lagaltBE.services.messageBoard.MessageBoardService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
@@ -19,9 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
-import java.util.Collection;
 import java.util.Set;
 
 @RestController

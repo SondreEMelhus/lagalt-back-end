@@ -29,13 +29,13 @@ public abstract class ProjectMapper {
     @Named("skillsToString")
     Set<String> mapSkillsToIds(Set<Skill> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Skill::getTitle).collect(Collectors.toSet());
     }
 
     @Named("keywordsToString")
     Set<String> mapKeywordsToString(Set<Keyword> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Keyword::getTitle).collect(Collectors.toSet());
     }
 
     @Named("industriesToString")

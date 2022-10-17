@@ -5,7 +5,6 @@ import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
-import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;
@@ -86,17 +85,18 @@ public class AccountController {
                     description = "Success",
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ProjectDTO.class)))}),
-            @ApiResponse(responseCode = "404",
+            @ApiResponse(responseCode = "400",
                     description = "account does not exist with supplied username",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorResponse.class))})
     })
     @GetMapping("search") // GET: localhost:8080/api/v1/accounts/search
     public ResponseEntity<AccountDTO> findByName(@RequestParam String username){
-        AccountDTO dto = accountMapper.accountToAccountDto(
-                accountService.findByUsername(username)
-        );
-        System.out.println(dto);
+        Account account = accountService.findByUsername(username);
+        if (account == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        AccountDTO dto = accountMapper.accountToAccountDto(account);
         return ResponseEntity.ok(dto);
     }
 

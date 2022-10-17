@@ -1,12 +1,10 @@
 package com.lagaltBE.lagaltBE.services.project;
 
-import com.lagaltBE.lagaltBE.models.Contributor;
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Collection;
-import java.util.Set;
 
 @Service
 public class ProjectServiceImp implements ProjectService {
@@ -18,8 +16,8 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public Project findById(Integer integer) {
-        return projectRepository.findById(integer).get();
+    public Project findById(Integer id) {
+        return projectRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

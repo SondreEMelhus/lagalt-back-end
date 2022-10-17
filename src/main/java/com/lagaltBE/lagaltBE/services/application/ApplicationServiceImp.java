@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.application;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Application;
 import com.lagaltBE.lagaltBE.repositories.ApplicationRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ApplicationServiceImp implements ApplicationService {
 
     @Override
     public Application findById(Integer id) {
-        return applicationRepository.findById(id).get();
+        return applicationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
