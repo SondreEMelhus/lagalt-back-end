@@ -5,7 +5,6 @@ import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
-import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;

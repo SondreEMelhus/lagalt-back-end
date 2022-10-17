@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.keyword;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Keyword;
 import com.lagaltBE.lagaltBE.repositories.KeywordRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class KeywordServiceImp implements KeywordService {
 
     @Override
     public Keyword findById(Integer id) {
-        return keywordRepository.findById(id).get();
+        return keywordRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.statusUpdate;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.StatusUpdate;
 import com.lagaltBE.lagaltBE.repositories.StatusUpdateRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class StatusUpdateServiceImp implements StatusUpdateService{
 
     @Override
     public StatusUpdate findById(Integer id) {
-        return statusUpdateRepository.findById(id).get();
+        return statusUpdateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

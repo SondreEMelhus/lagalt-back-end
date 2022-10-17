@@ -1,10 +1,8 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.KeywordMapper;
-import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.models.Keyword;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
-import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.models.dtos.KeywordDTO;
 import com.lagaltBE.lagaltBE.services.keyword.KeywordService;
 import io.swagger.v3.oas.annotations.Operation;

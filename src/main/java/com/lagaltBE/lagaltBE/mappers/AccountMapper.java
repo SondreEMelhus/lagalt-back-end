@@ -21,6 +21,6 @@ public abstract class AccountMapper {
     @Named("skillsToString")
     Set<String> mapSkillsToString(Set<Skill> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Skill::getTitle).collect(Collectors.toSet());
     }
 }

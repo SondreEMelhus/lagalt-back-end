@@ -6,7 +6,6 @@ import com.lagaltBE.lagaltBE.mappers.*;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
-import com.lagaltBE.lagaltBE.services.contributor.ContributorService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;
@@ -33,17 +32,15 @@ public class ProjectController {
     private final SkillService skillService;
     private final IndustryMapper industryMapper;
     private final KeywordMapper keywordMapper;
-    private final ContributorService contributorService;
     private final ContributorMapper contributorMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper, ContributorService contributorService, ContributorMapper contributorMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper, ContributorMapper contributorMapper) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
         this.industryMapper = industryMapper;
         this.keywordMapper = keywordMapper;
-        this.contributorService = contributorService;
         this.contributorMapper = contributorMapper;
     }
 
@@ -122,7 +119,6 @@ public class ProjectController {
         return ResponseEntity.created(location).build();
     }
 
-    // virker ikke?
     @Operation(summary = "Updates a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "204",
