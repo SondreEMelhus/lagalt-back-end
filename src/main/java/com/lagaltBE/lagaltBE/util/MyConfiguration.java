@@ -20,9 +20,7 @@ public class MyConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                     .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
-                    .allowedOrigins("https://lagalt-java.herokuapp.com")
-                    .allowedOrigins("http://localhost:8080")
-                    .allowedOrigins("http://localhost:3000");
+                    .allowedOrigins("https://lagalt-java.herokuapp.com", "http://localhost:8080", "http://localhost:3000");
             }
         };
 
