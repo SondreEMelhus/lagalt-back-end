@@ -21,8 +21,10 @@ public class MyConfiguration {
                 registry.addMapping("/**")
                     .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
                     .allowedOrigins("https://lagalt-java.herokuapp.com")
-                    .allowedOrigins("http://localhost:8080");
+                    .allowedOrigins("http://localhost:8080")
+                    .allowedOrigins("http://localhost:3000");
             }
         };
+
     }
 }
