@@ -100,7 +100,7 @@ INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (23,4);
 
 -- create projects
 insert into project (title, industry_id, status, description) values ('Ordspill', 3, 'Startet', 'Ordspill er et mobilspill inspirert av kryssord.');
-insert into project (title, industry_id, status, description) values ('Treningsapp', 4, 'Startet', 'Jeg ønsker å utvikle en treningsapp som hjelper deg å lage et treningsprogram og hvor du kan logføre utvkilingen din. Jeg ønsker også at man skal kunne følge andre og se hva de trener.');
+insert into project (title, industry_id, status, description) values ('Treningsapp', 4, 'Startet', 'Jeg ønsker å utvikle en treningsapp som hjelper deg å lage et treningsprogram og hvor du kan loggføre utviklingen din. Jeg ønsker også at man skal kunne følge andre og se hva de trener.');
 insert into project (title, industry_id) values ('Konsert', 1);
 insert into project (title, industry_id) values ('Kortfilm', 2);
 insert into project (title, industry_id) values ('The room 2', 1);
@@ -206,7 +206,7 @@ INSERT INTO chat ("text", "timestamp", "username", "project_id") VALUES ('Jeg li
 
 --create message boards
 INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('React problemer', 'Kan noen hjelpe meg med React?', '2022-10-12T08:10:10+00:00', 'Ulrik', 1);
-INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('Møte', 'Skal vi ha et møte snart?', '2022-10-12T11:10:10+00:00', 'Trygve', 1);
+INSERT INTO message_board ("title", "text", "timestamp", "username", "project_id") VALUES ('Møte', 'Kan vi ha et møte snart?', '2022-10-12T11:10:10+00:00', 'Trygve', 1);
 
 --create messages
 INSERT INTO message ("text", "timestamp", "message_board_id", "username") VALUES ('Ja, jeg kan hjelpe', '2022-10-12T08:12:10+00:00', 1, 'Sondre');
