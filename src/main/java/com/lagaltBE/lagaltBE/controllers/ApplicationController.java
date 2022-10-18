@@ -54,8 +54,10 @@ public class ApplicationController {
         Set<Application> projectApplications = project.getApplications();
         Set<ProjectApplicationDTO> projectApplicationDTO = new HashSet<>();
         for (Application application : projectApplications){
-            if (application.getStatus().compareTo("Pending") == 0) {
-                projectApplicationDTO.add(applicationMapper.applicationToProjectApplicationDto(application));
+            if (application.getStatus() != null) {
+                if (application.getStatus().compareTo("Pending") == 0) {
+                    projectApplicationDTO.add(applicationMapper.applicationToProjectApplicationDto(application));
+                }
             }
         }
         return ResponseEntity.ok(projectApplicationDTO);
