@@ -17,6 +17,7 @@ import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.*;
 
 @RestController
@@ -124,5 +125,22 @@ public class ApplicationController {
         application.setStatus("Denied");
         applicationService.update(application);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Add an application")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "201",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @PostMapping    //POST: api/v1/applications
+    public  ResponseEntity add(@RequestBody Application application) {
+        Application newApplication = applicationService.add(application);
+        URI location = URI.create("applications/" + newApplication.getId());
+        return ResponseEntity.created(location).build();
     }
 }
