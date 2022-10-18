@@ -40,6 +40,11 @@ public class Project {
     @ManyToOne
     @JoinColumn
     private Industry industry;
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany
+    @JoinTable(
+            name = "keyword_project",
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "keyword_id")}
+    )
     private Set<Keyword> keywords;
 }
