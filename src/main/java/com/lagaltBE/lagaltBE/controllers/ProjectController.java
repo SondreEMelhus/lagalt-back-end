@@ -3,9 +3,13 @@ package com.lagaltBE.lagaltBE.controllers;
 import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.mappers.*;
+import com.lagaltBE.lagaltBE.models.Contributor;
+import com.lagaltBE.lagaltBE.models.Keyword;
 import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.models.dtos.ProjectDTO;
+import com.lagaltBE.lagaltBE.services.contributor.ContributorService;
+import com.lagaltBE.lagaltBE.services.keyword.KeywordService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import com.lagaltBE.lagaltBE.services.skill.SkillService;
 import com.lagaltBE.lagaltBE.util.ApiErrorResponse;
@@ -33,8 +37,10 @@ public class ProjectController {
     private final IndustryMapper industryMapper;
     private final KeywordMapper keywordMapper;
     private final ContributorMapper contributorMapper;
+    private final KeywordService keywordService;
+    private final ContributorService contributorService;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper, ContributorMapper contributorMapper) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper, SkillMapper skillMapper, SkillService skillService, IndustryMapper industryMapper, KeywordMapper keywordMapper, ContributorMapper contributorMapper, KeywordService keywordService, ContributorService contributorService) {
         this.projectService = projectService;
         this.projectMapper = projectMapper;
         this.skillMapper = skillMapper;
@@ -42,6 +48,8 @@ public class ProjectController {
         this.industryMapper = industryMapper;
         this.keywordMapper = keywordMapper;
         this.contributorMapper = contributorMapper;
+        this.keywordService = keywordService;
+        this.contributorService = contributorService;
     }
 
     @Operation(summary = "Get all projects")
@@ -263,6 +271,30 @@ public class ProjectController {
         return ResponseEntity.ok(keywordMapper.keywordToKeywordDto(project.getKeywords()));
     }
 
+    @Operation(summary = "Add a keyword to a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Keyword successfully added",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) }),
+            @ApiResponse(responseCode = "404",
+                    description = "Project not found with supplied ID",
+                    content = @Content)
+    })
+    @PutMapping("/{projectId}/addKeyword")
+    public ResponseEntity addKeyword(@PathVariable int projectId, @RequestBody int keywordId) {
+        Project project = projectService.findById(projectId);
+        Keyword keyword = keywordService.findById(keywordId);
+        Set<Keyword> keywords = project.getKeywords();
+        keywords.add(keyword);
+        project.setKeywords(keywords);
+        projectService.update(project);
+        return ResponseEntity.noContent().build();
+    }
+
     @Operation(summary = "Get contributors of a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",
@@ -280,5 +312,41 @@ public class ProjectController {
     public ResponseEntity getProjectContributors(@PathVariable int id){
         Project project = projectService.findById(id);
         return ResponseEntity.ok(contributorMapper.contributorToContributorDto(project.getContributors()));
+    }
+
+    @Operation(summary = "Get IDs of contributors of a project")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such project",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/contributorIds")
+    public ResponseEntity getProjectContributorsIDs(@PathVariable int id){
+        Project project = projectService.findById(id);
+        return ResponseEntity.ok(contributorMapper.contributorToContributorIdDto(project.getContributors()));
+    }
+
+    @Operation(summary = "Adds a new contributor")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "201",
+                    description = "contributor successfully added",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Malformed request",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class))})
+    })
+    @PostMapping ("/addContributor")
+    public ResponseEntity addContributor(@RequestBody Contributor contributor) {
+        Contributor newContributor = contributorService.add(contributor);
+        URI location = URI.create("contributors/" + newContributor.getId());
+        return ResponseEntity.created(location).build();
     }
 }
