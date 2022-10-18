@@ -1,7 +1,10 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.AccountMapper;
+import com.lagaltBE.lagaltBE.mappers.ProjectMapper;
 import com.lagaltBE.lagaltBE.models.Account;
+import com.lagaltBE.lagaltBE.models.Contributor;
+import com.lagaltBE.lagaltBE.models.Project;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
 import com.lagaltBE.lagaltBE.mappers.SkillMapper;
 import com.lagaltBE.lagaltBE.models.Skill;
@@ -20,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -30,12 +34,14 @@ public class AccountController {
     private final AccountMapper accountMapper;
     private final SkillMapper skillMapper;
     private final SkillService skillService;
+    private final ProjectMapper projectMapper;
 
-    public AccountController(AccountService accountService, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService) {
+    public AccountController(AccountService accountService, AccountMapper accountMapper, SkillMapper skillMapper, SkillService skillService, ProjectMapper projectMapper) {
         this.accountService = accountService;
         this.accountMapper = accountMapper;
         this.skillMapper = skillMapper;
         this.skillService = skillService;
+        this.projectMapper = projectMapper;
     }
 
     @Operation(summary = "Get all user accounts")
@@ -262,5 +268,29 @@ public class AccountController {
         account.setVisible(false);
         accountService.update(account);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get all projects a user has contributed to")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200",
+                    description = "success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "malformed request",
+                    content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "no such user",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
+    })
+    @GetMapping("/{id}/projects")
+    public ResponseEntity getProjects(@PathVariable int id){
+        Account user = accountService.findById(id);
+        Set<Contributor> contributors = user.getContributors();
+        Set<Project> projects = new HashSet<>();
+        for (Contributor contribution : contributors) {
+            projects.add(contribution.getProject());
+        }
+        return ResponseEntity.ok(projects.stream().map(projectMapper::projectToProjectDto));
     }
 }
