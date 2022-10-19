@@ -14,36 +14,30 @@ INSERT INTO skill (title, industry_id) VALUES ('Piano', 1);
 INSERT INTO skill (title, industry_id) VALUES ('Fiolin', 1); --7
 
 -- create skills for 'Film'
-INSERT INTO skill (title, industry_id) VALUES ('Produsering', 2); --8
-INSERT INTO skill (title, industry_id) VALUES ('Regissering', 2);
+INSERT INTO skill (title, industry_id) VALUES ('Regissering', 2); --8
 INSERT INTO skill (title, industry_id) VALUES ('Skuespill', 2);
-INSERT INTO skill (title, industry_id) VALUES ('Redigering', 2);
+INSERT INTO skill (title, industry_id) VALUES ('Redigering', 2); --10
 INSERT INTO skill (title, industry_id) VALUES ('Lyddesign', 2);
 INSERT INTO skill (title, industry_id) VALUES ('Filming', 2);
 INSERT INTO skill (title, industry_id) VALUES ('Manus', 2);
-INSERT INTO skill (title, industry_id) VALUES ('Sminke', 2); --15
+INSERT INTO skill (title, industry_id) VALUES ('Sminke', 2); --14
 
 -- create skills for 'Spillutvikling'
-INSERT INTO skill (title, industry_id) VALUES ('Java', 3); --16
+INSERT INTO skill (title, industry_id) VALUES ('Java', 3); --15
 INSERT INTO skill (title, industry_id) VALUES ('.Net', 3);
-INSERT INTO skill (title, industry_id) VALUES ('UX', 3);
 INSERT INTO skill (title, industry_id) VALUES ('Grafikk', 3);
-INSERT INTO skill (title, industry_id) VALUES ('Lyddesign', 3);
 INSERT INTO skill (title, industry_id) VALUES ('Manus', 3);
-INSERT INTO skill (title, industry_id) VALUES ('Database', 3); --22
-INSERT INTO skill (title, industry_id) VALUES ('Testing', 3);
-INSERT INTO skill (title, industry_id) VALUES ('Git', 3); --24
+INSERT INTO skill (title, industry_id) VALUES ('Database', 3); --19
+INSERT INTO skill (title, industry_id) VALUES ('Testing', 3); --20
 
 -- create skills for 'Webutvikling'
-INSERT INTO skill (title, industry_id) VALUES ('React', 4); --25
+INSERT INTO skill (title, industry_id) VALUES ('React', 4); --21
 INSERT INTO skill (title, industry_id) VALUES ('Vue', 4);
 INSERT INTO skill (title, industry_id) VALUES ('Angular', 4);
-INSERT INTO skill (title, industry_id) VALUES ('UX', 4); -- 28
+INSERT INTO skill (title, industry_id) VALUES ('UX', 4); -- 24
 INSERT INTO skill (title, industry_id) VALUES ('CSS', 4);
 INSERT INTO skill (title, industry_id) VALUES ('HTML', 4);
-INSERT INTO skill (title, industry_id) VALUES ('Git', 4); --31
-INSERT INTO skill (title, industry_id) VALUES ('Testing', 4); --32
-INSERT INTO skill (title, industry_id) VALUES ('Database', 4); --33
+INSERT INTO skill (title, industry_id) VALUES ('Git', 4); --27
 
 -- create keywords
 INSERT INTO keyword (title) VALUES ('Pop');
@@ -110,13 +104,11 @@ insert into project (title, industry_id) values ('Reklame for treningsklær', 2)
 -- add skills to projects
 -- project 1 'Ordspill'
 insert into skill_project ("project_id", "skill_id") values (1,17);
-insert into skill_project ("project_id", "skill_id") values (1,22);
-insert into skill_project ("project_id", "skill_id") values (1,18);
+insert into skill_project ("project_id", "skill_id") values (1,21);
 -- project 2 'Treningsapp'
 insert into skill_project ("project_id", "skill_id") values (2,25);
-insert into skill_project ("project_id", "skill_id") values (2,28);
-insert into skill_project ("project_id", "skill_id") values (2,31);
-insert into skill_project ("project_id", "skill_id") values (2,32);
+insert into skill_project ("project_id", "skill_id") values (2,27);
+insert into skill_project ("project_id", "skill_id") values (2,24);
 -- project 3 'Konsert'
 insert into skill_project ("project_id", "skill_id") values (3,1);
 insert into skill_project ("project_id", "skill_id") values (3,2);
@@ -131,9 +123,8 @@ insert into skill_project ("project_id", "skill_id") values (5,4);
 insert into skill_project ("project_id", "skill_id") values (5,5);
 -- project 6 'Alumini'
 insert into skill_project ("project_id", "skill_id") values (6,27);
-insert into skill_project ("project_id", "skill_id") values (6,28);
+insert into skill_project ("project_id", "skill_id") values (6,23);
 -- project 7 'Reklame for treningsklær'
-insert into skill_project ("project_id", "skill_id") values (7,8);
 insert into skill_project ("project_id", "skill_id") values (7,10);
 insert into skill_project ("project_id", "skill_id") values (7,11);
 
@@ -170,18 +161,18 @@ insert into account (username, visible, description) values ('Synnøve', true, '
 -- add skills to accounts
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,3);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,17);
-INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,31);
+INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,24);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,25);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (2,3);
-INSERT INTO account_skill ("account_id", "skill_id") VALUES (2,33);
+INSERT INTO account_skill ("account_id", "skill_id") VALUES (2,22);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (2,16);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (5,26);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (5,27);
-INSERT INTO account_skill ("account_id", "skill_id") VALUES (5,28);
+INSERT INTO account_skill ("account_id", "skill_id") VALUES (5,24);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,26);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,27);
-INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,28);
-INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,19);
+INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,25);
+INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,12);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,20);
 
 -- create contributors to project

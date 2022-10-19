@@ -314,25 +314,6 @@ public class ProjectController {
         return ResponseEntity.ok(contributorMapper.contributorToContributorDto(project.getContributors()));
     }
 
-    @Operation(summary = "Get IDs of contributors of a project")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "200",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "400",
-                    description = "malformed request",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such project",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @GetMapping("/{id}/contributorIds")
-    public ResponseEntity getProjectContributorsIDs(@PathVariable int id){
-        Project project = projectService.findById(id);
-        return ResponseEntity.ok(contributorMapper.contributorToContributorIdDto(project.getContributors()));
-    }
-
     @Operation(summary = "Adds a new contributor")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201",
