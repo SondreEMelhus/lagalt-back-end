@@ -149,22 +149,6 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Deletes a project")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "201",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such project",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @DeleteMapping("{id}")  //POST: api/v1/projects/1
-    public ResponseEntity delete(@PathVariable int id) {
-        projectService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Get skills of a project")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",
