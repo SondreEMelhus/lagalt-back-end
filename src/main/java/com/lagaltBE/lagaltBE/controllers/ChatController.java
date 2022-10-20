@@ -3,6 +3,7 @@ package com.lagaltBE.lagaltBE.controllers;
 import com.lagaltBE.lagaltBE.mappers.ChatMapper;
 import com.lagaltBE.lagaltBE.models.Chat;
 import com.lagaltBE.lagaltBE.models.Project;
+import com.lagaltBE.lagaltBE.services.chat.ChatService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,10 +21,12 @@ public class ChatController {
 
     private final ChatMapper chatMapper;
     private final ProjectService projectService;
+    private final ChatService chatService;
 
-    public ChatController(ChatMapper chatMapper, ProjectService projectService) {
+    public ChatController(ChatMapper chatMapper, ProjectService projectService, ChatService chatService) {
         this.chatMapper = chatMapper;
         this.projectService = projectService;
+        this.chatService = chatService;
     }
 
     @Operation(summary = "Get all chats of a project")
@@ -43,12 +46,13 @@ public class ChatController {
     public ResponseEntity getAllChatsOfProject(@PathVariable int id){
         Project project = projectService.findById(id);
         Set<Chat> chats = project.getChats();
+        System.out.println(chats);
         return ResponseEntity.ok(chats.stream().map(chatMapper::chatToChatDto));
     }
 
     @Operation(summary = "Add a chat to a project")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "201",
+            @ApiResponse(responseCode = "204",
                     description = "success",
                     content = @Content),
             @ApiResponse(responseCode = "400",
@@ -59,8 +63,9 @@ public class ChatController {
     @PostMapping("/{projectId}/addChat")
     public  ResponseEntity add(@PathVariable int projectId, @RequestBody Chat chat) {
         Project project = projectService.findById(projectId);
+        Chat newChat = chatService.add(chat);
         Set<Chat> chats = project.getChats();
-        chats.add(chat);
+        chats.add(newChat);
         project.setChats(chats);
         projectService.update(project);
         return ResponseEntity.noContent().build();

@@ -144,22 +144,6 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Delete a user account")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such user",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @DeleteMapping("{id}")  //DELETE: api/v1/accounts/1
-    public ResponseEntity delete(@PathVariable int id) {
-        accountService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Get skills of a user")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",

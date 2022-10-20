@@ -102,20 +102,4 @@ public class KeywordController {
         keywordService.update(keyword);
         return ResponseEntity.noContent().build();
     }
-
-    @Operation(summary = "Delete a keyword")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such keyword",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable int id) {
-        keywordService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
 }

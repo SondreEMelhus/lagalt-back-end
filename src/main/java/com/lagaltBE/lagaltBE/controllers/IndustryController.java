@@ -88,22 +88,6 @@ public class IndustryController {
         return ResponseEntity.created(location).build();
     }
 
-    @Operation(summary = "Delete a industry")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such industry",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable int id) {
-        industryService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Get keywords of a industry")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200",
