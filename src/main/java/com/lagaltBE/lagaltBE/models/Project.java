@@ -38,7 +38,7 @@ public class Project {
     )
     private Set<Skill> skills;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
     private Industry industry;
     @ManyToMany
     @JoinTable(
