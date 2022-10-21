@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.contributor;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Contributor;
 import com.lagaltBE.lagaltBE.repositories.ContributorRepository;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ public class ContributorServiceImp implements ContributorService {
     }
 
     @Override
-    public Contributor findById(Integer integer) {
-        return contributorRepository.findById(integer).get();
+    public Contributor findById(Integer id) {
+        return contributorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

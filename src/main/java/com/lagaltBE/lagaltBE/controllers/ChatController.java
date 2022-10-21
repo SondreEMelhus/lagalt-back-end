@@ -1,11 +1,8 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.ChatMapper;
-import com.lagaltBE.lagaltBE.models.Account;
 import com.lagaltBE.lagaltBE.models.Chat;
 import com.lagaltBE.lagaltBE.models.Project;
-import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
-import com.lagaltBE.lagaltBE.models.dtos.ChatDTO;
 import com.lagaltBE.lagaltBE.services.chat.ChatService;
 import com.lagaltBE.lagaltBE.services.project.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.net.URI;
 import java.util.Set;
 
 @RestController
@@ -50,12 +46,13 @@ public class ChatController {
     public ResponseEntity getAllChatsOfProject(@PathVariable int id){
         Project project = projectService.findById(id);
         Set<Chat> chats = project.getChats();
+        System.out.println(chats);
         return ResponseEntity.ok(chats.stream().map(chatMapper::chatToChatDto));
     }
 
     @Operation(summary = "Add a chat to a project")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "201",
+            @ApiResponse(responseCode = "204",
                     description = "success",
                     content = @Content),
             @ApiResponse(responseCode = "400",
@@ -63,10 +60,14 @@ public class ChatController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorAttributeOptions.class)) })
     })
-    @PostMapping
-    public  ResponseEntity add(@RequestBody Chat chat) {
+    @PostMapping("/{projectId}/addChat")
+    public  ResponseEntity add(@PathVariable int projectId, @RequestBody Chat chat) {
+        Project project = projectService.findById(projectId);
         Chat newChat = chatService.add(chat);
-        URI location = URI.create("chats/" + newChat.getId());
-        return ResponseEntity.created(location).build();
+        Set<Chat> chats = project.getChats();
+        chats.add(newChat);
+        project.setChats(chats);
+        projectService.update(project);
+        return ResponseEntity.noContent().build();
     }
 }

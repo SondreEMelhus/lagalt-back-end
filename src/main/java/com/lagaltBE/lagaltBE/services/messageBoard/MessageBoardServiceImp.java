@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.messageBoard;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.MessageBoard;
 import com.lagaltBE.lagaltBE.repositories.MessageBoardRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class MessageBoardServiceImp implements MessageBoardService {
 
     @Override
     public MessageBoard findById(Integer id) {
-        return messageBoardRepository.findById(id).get();
+        return messageBoardRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

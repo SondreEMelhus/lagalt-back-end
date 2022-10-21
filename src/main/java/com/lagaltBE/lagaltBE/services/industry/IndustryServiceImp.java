@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.industry;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.repositories.IndustryRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class IndustryServiceImp implements IndustryService {
 
     @Override
     public Industry findById(Integer id) {
-        return industryRepository.findById(id).get();
+        return industryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
