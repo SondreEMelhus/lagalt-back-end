@@ -14,10 +14,12 @@ public class Account {
     private int id;
     @Column(length = 50, nullable = false, unique = true)
     private String username;
-    @Column()
-    private boolean visible;
     @Column(length = 200)
     private String description;
+    @Column()
+    private String portfolio;
+    @Column(length = 200)
+    private boolean visible;
     @OneToMany(mappedBy = "account")
     Set<Contributor> contributors;
     @OneToMany(mappedBy = "account")
