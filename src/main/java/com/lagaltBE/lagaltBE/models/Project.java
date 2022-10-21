@@ -3,7 +3,6 @@ package com.lagaltBE.lagaltBE.models;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -39,8 +38,13 @@ public class Project {
     )
     private Set<Skill> skills;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
     private Industry industry;
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany
+    @JoinTable(
+            name = "keyword_project",
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "keyword_id")}
+    )
     private Set<Keyword> keywords;
 }

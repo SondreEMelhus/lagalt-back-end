@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.projectInteractionHistory;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.ProjectInteractionHistory;
 import com.lagaltBE.lagaltBE.repositories.ProjectInteractionHistoryRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ProjectInteractionHistoryServiceImp implements ProjectInteractionHi
 
     @Override
     public ProjectInteractionHistory findById(Integer id) {
-        return projectInteractionHistoryRepository.findById(id).get();
+        return projectInteractionHistoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override

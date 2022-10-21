@@ -25,18 +25,18 @@ public abstract class IndustryMapper {
     @Named("projectsToIds")
     Set<Integer> mapProjectsToIds(Set<Project> projects) {
         if (projects == null) return null;
-        return projects.stream().map(project -> project.getId()).collect(Collectors.toSet());
+        return projects.stream().map(Project::getId).collect(Collectors.toSet());
     }
 
     @Named("keywordsToString")
     Set<String> mapKeywordsToString(Set<Keyword> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Keyword::getTitle).collect(Collectors.toSet());
     }
 
     @Named("skillsToString")
     Set<String> mapSkillsToString(Set<Skill> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Skill::getTitle).collect(Collectors.toSet());
     }
 }

@@ -21,11 +21,6 @@ public class Keyword {
             inverseJoinColumns = {@JoinColumn(name = "industry_id")}
     )
     private Set<Industry> industries;
-    @ManyToMany
-    @JoinTable(
-            name = "keyword_project",
-            joinColumns = {@JoinColumn(name = "keyword_id")},
-            inverseJoinColumns = {@JoinColumn(name = "project_id")}
-    )
+    @ManyToMany(mappedBy = "keywords")
     private Set<Project> projects;
 }

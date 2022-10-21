@@ -1,10 +1,8 @@
 package com.lagaltBE.lagaltBE.controllers;
 
 import com.lagaltBE.lagaltBE.mappers.KeywordMapper;
-import com.lagaltBE.lagaltBE.models.Industry;
 import com.lagaltBE.lagaltBE.models.Keyword;
 import com.lagaltBE.lagaltBE.models.dtos.AccountDTO;
-import com.lagaltBE.lagaltBE.models.dtos.IndustryDTO;
 import com.lagaltBE.lagaltBE.models.dtos.KeywordDTO;
 import com.lagaltBE.lagaltBE.services.keyword.KeywordService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,22 +100,6 @@ public class KeywordController {
         if (id != keyword.getId())
             return ResponseEntity.badRequest().build();
         keywordService.update(keyword);
-        return ResponseEntity.noContent().build();
-    }
-
-    @Operation(summary = "Delete a keyword")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "204",
-                    description = "success",
-                    content = @Content),
-            @ApiResponse(responseCode = "500",
-                    description = "no such keyword",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorAttributeOptions.class)) })
-    })
-    @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable int id) {
-        keywordService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -21,6 +21,6 @@ public abstract class KeywordMapper {
     @Named("industriesToString")
     Set<String> mapIndustriesToString(Set<Industry> source) {
         if(source == null) return null;
-        return source.stream().map(s -> s.getTitle()).collect(Collectors.toSet());
+        return source.stream().map(Industry::getTitle).collect(Collectors.toSet());
     }
 }

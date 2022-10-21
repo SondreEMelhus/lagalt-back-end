@@ -1,5 +1,6 @@
 package com.lagaltBE.lagaltBE.services.skill;
 
+import com.lagaltBE.lagaltBE.exceptions.EntityNotFoundException;
 import com.lagaltBE.lagaltBE.models.Skill;
 import com.lagaltBE.lagaltBE.repositories.SkillRepository;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,7 @@ public class SkillServiceImp implements SkillService {
 
     @Override
     public Skill findById(Integer id) {
-        // TODO add or else throw UserAccountNotFoundException like this: or find another solution
-        // return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
-        return skillRepository.findById(id).get();
+        return skillRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
