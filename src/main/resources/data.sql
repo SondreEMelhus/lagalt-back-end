@@ -94,12 +94,12 @@ INSERT INTO keyword_industry("keyword_id", "industry_id") VALUES (23,4);
 
 -- create projects
 insert into project (title, industry_id, status, description) values ('Ordspill', 3, 'Startet', 'Ordspill er et mobilspill inspirert av kryssord.');
-insert into project (title, industry_id, status, description) values ('Treningsapp', 4, 'Startet', 'Jeg ønsker å utvikle en treningsapp som hjelper deg å lage et treningsprogram og hvor du kan loggføre utviklingen din. Jeg ønsker også at man skal kunne følge andre og se hva de trener.');
-insert into project (title, industry_id) values ('Konsert', 1);
-insert into project (title, industry_id) values ('Kortfilm', 2);
-insert into project (title, industry_id) values ('The room 2', 1);
-insert into project (title, industry_id) values ('Alumini', 4);
-insert into project (title, industry_id) values ('Reklame for treningsklær', 2);
+insert into project (title, industry_id, status, description) values ('Treningsapp', 4, 'Planlegges', 'Jeg ønsker å utvikle en treningsapp som hjelper deg å lage et treningsprogram og hvor du kan loggføre utviklingen din. Jeg ønsker også at man skal kunne følge andre og se hva de trener.');
+insert into project (title, industry_id, status, description) values ('Konsert', 1, 'Planlegges', 'Vi er en gruppe som planlegger en rekke med konserter og ser etter flere bandmedlemmer.');
+insert into project (title, industry_id, status, description) values ('Kortfilm', 2, 'Startet', 'Vi holder på å lage en skrekk-komedie kortfilm og trenger flere folk.');
+insert into project (title, industry_id, status, description) values ('Boyband', 1, 'Planlegges', 'Vi er to gutter som ser etter andre som vil danne et boyband med oss.');
+insert into project (title, industry_id, status, description) values ('Alumini', 4, 'Startet', 'I dette prosjektet lager vi et sosialt medie for at tidligere studenter av en skole kan holde kontakten.');
+insert into project (title, industry_id, status, description) values ('Reklame for treningsklær', 2, 'Planlegges', 'Vi trenger flere folk til å lage en reklamefilm.');
 
 -- add skills to projects
 -- project 1 'Ordspill'
@@ -176,13 +176,19 @@ INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,12);
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (6,20);
 
 -- create contributors to project
-insert into contributor (account_id, project_id, "role") values (1,1,'owner');
+insert into contributor (account_id, project_id, "role") values (1,1,'owner'); -- 1
 insert into contributor (account_id, project_id, "role") values (2,1,'member');
 insert into contributor (account_id, project_id, "role") values (3,1,'member');
 insert into contributor (account_id, project_id, "role") values (4,1,'member');
-insert into contributor (account_id, project_id, "role") values (5,2,'owner');
+insert into contributor (account_id, project_id, "role") values (5,2,'owner'); -- 2
 insert into contributor (account_id, project_id, "role") values (6,2,'member');
-
+insert into contributor (account_id, project_id, "role") values (5,2,'owner');
+insert into contributor (account_id, project_id, "role") values (3,3,'owner'); --3
+insert into contributor (account_id, project_id, "role") values (4,4,'owner'); --4
+insert into contributor (account_id, project_id, "role") values (1,5,'owner'); -- 5
+insert into contributor (account_id, project_id, "role") values (4,5,'member');
+insert into contributor (account_id, project_id, "role") values (4,6,'owner'); --6
+insert into contributor (account_id, project_id, "role") values (1,7,'owner'); -- 7
 -- create applications
 INSERT INTO application (account_id, project_id, motivation) VALUES (5,1,'Jeg ønsker å bidra til dette prosjektet fordi det virker spennende.');
 INSERT INTO application (account_id, project_id, motivation) VALUES (6,1,'Jeg ønsker å bidra til dette prosjektet fordi det virker spennende.');
