@@ -151,12 +151,12 @@ INSERT INTO keyword_project ("project_id", "keyword_id") values (7,9);
 INSERT INTO keyword_project ("project_id", "keyword_id") values (7,10);
 
 -- create accounts
-insert into account (username, visible, description) values ('Ulrik', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.');
-insert into account (username, visible, description) values ('Trygve', false, 'Jeg er interessert i spillutvikling og webutvikling.');
-insert into account (username, visible, description) values ('Karoline', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.');
-insert into account (username, visible, description) values ('Sondre', true, 'Jeg er interessert i spillutvikling og webutvikling.');
-insert into account (username, visible, description) values ('Mette', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.');
-insert into account (username, visible, description) values ('Synnøve', true, 'Jeg er interessert i spillutvikling og webutvikling.');
+insert into account (username, visible, description, portfolio) values ('Ulrik', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.', 'Utvikler i Visma (2020 ->)');
+insert into account (username, visible, description, portfolio) values ('Trygve', false, 'Jeg er interessert i spillutvikling og webutvikling.', 'Spilldesigner i EA Games (2010 - 2015)');
+insert into account (username, visible, description, portfolio) values ('Karoline', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.', 'Utvikler i Sopra Steria (2019 ->)');
+insert into account (username, visible, description, portfolio) values ('Sondre', true, 'Jeg er interessert i spillutvikling og webutvikling.', 'Utvikler i Bouvet (2018 ->)');
+insert into account (username, visible, description, portfolio) values ('Mette', true, 'Jeg er webutvikler og ser etter nye prosjekter jeg kan bidra til.', 'Utvikler i Experis (2007-2010)');
+insert into account (username, visible, description, portfolio) values ('Synnøve', true, 'Jeg er interessert i spillutvikling og webutvikling.', 'Utvikler i Nordea (aug 2016 ->)');
 
 -- add skills to accounts
 INSERT INTO account_skill ("account_id", "skill_id") VALUES (1,3);
