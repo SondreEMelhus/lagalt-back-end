@@ -3,9 +3,8 @@
 This is the backend solution of a case project during the Noroff Accelerate course. The case project is called Lagalt and is a web application where people can find other people to cooperate on creative projects.
 ## Description
 The backend part contains a database solution and an API. It is created using Java, Spring Framework, and Hibernate. The database is used to store projects and accounts and related information. The API is used to accsess, modify, and add data realting to projects or accounts. 
-The github of the frontend is: https://github.com/SondreEMelhus/lagalt
-The following is the ER diagram of our database:![ER](https://user-images.githubusercontent.com/48794099/197972077-4a696871-3091-4e35-af46-1b782ca87a0c.PNG)
-
+The github of the frontend is: https://github.com/SondreEMelhus/lagalt.
+The following is the ER diagram of our database:
 ![ER](https://user-images.githubusercontent.com/48794099/197971066-55fcdbec-3d43-47ea-b6e5-8e13da952e3d.PNG)
 
 ## Deployment
