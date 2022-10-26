@@ -1,4 +1,4 @@
-# lagalt-back-end
+# Lagalt backend
 ## Introduction
 This is the backend solution of a case project during the Noroff Accelerate course. The case project is called Lagalt and is a web application where people can find other people to cooperate on creative projects.
 ## Description
