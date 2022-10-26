@@ -28,10 +28,10 @@ If however you wish to run our back end api on your localhost:
 6. Open http://localhost:8080/swagger-ui.html
 
 ## Authors
-Ulrik Lunde
-Karolie Øijorden
-Sondre Melhus
-Trygve Johannessen
+- Ulrik Lunde
+- Karolie Øijorden
+- Sondre Melhus
+- Trygve Johannessen
 
 ## License
 MIT
